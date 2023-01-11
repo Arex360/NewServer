@@ -7,6 +7,10 @@ router.post('/postImage',(req,res)=>{
     let url = req.body.base64;
     let filename = "";
     let client = req.body.client;
+    var path ='images/';
+    var optionalObj = {'fileName': 'super1', 'type':'png'};
+    base64ToImage(url,path,optionalObj); 
+    /*
     console.log(url)
     // Create a unique filename
     filename = require('crypto').createHash('sha256').update(url).digest('hex').toString();
@@ -18,6 +22,6 @@ router.post('/postImage',(req,res)=>{
     let binaryData = Buffer.from(url, 'base64');
 
     fs.writeFileSync(filename, binaryData);
-    res.send('done')
+    res.send('done')*/
 })
 module.exports = router

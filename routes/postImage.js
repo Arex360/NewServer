@@ -15,7 +15,7 @@ router.post('/postImage',(req,res)=>{
     let output = filename+"out"
     let base64 = url
     filename = "images/"+filename +'.png'
-    fs.writeFile(filename,base64.toString(),{encoding: 'base64'},err=>{
+    fs.writeFile(filename,url,{encoding: 'base64'},err=>{
         res.send('done')
     })
 })

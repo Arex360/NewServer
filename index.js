@@ -13,7 +13,8 @@ let startServer = ()=>{
     app.use(addTrap)
     app.use(getTrap)
     app.use(entry)
-    connection.connect()
+    app.get('/',(req,res)=>res.send("ok"))
+    //connection.connect()
     app.listen(5000,()=>console.log('server started'))
 }
 startServer()

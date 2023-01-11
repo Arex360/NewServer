@@ -6,7 +6,7 @@ const router = express.Router()
 const base64ToImage = require('base64-to-image')
 router.post('/postImage',(req,res)=>{
     let url = req.body.base64;
-    console.log(url)
+    console.log(req.body)
     res.send("done")
     /*
     let filename = "";

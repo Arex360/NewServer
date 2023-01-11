@@ -1,0 +1,2 @@
+Requirement already satisfied: torch in c:\users\vmw9\appdata\local\programs\python\python38\lib\site-packages (1.9.0)
+Requirement already satisfied: typing-extensions in c:\users\vmw9\appdata\local\programs\python\python38\lib\site-packages (from torch) (3.10.0.0)

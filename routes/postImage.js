@@ -13,7 +13,10 @@ router.post('/postImage',(req,res)=>{
     let output = filename+"out"
     let base64 = url
     filename = "new/"+filename +'.png'
-    fs.writeFile(filename, base64, {encoding: 'base64'}, function(err) {
+    fs.writeFile(filename,base64,{encoding: 'base64'},err=>{
+        res.send('done')
+    })
+    /*fs.writeFile(filename, base64, {encoding: 'base64'}, function(err) {
         exec(`python detect.py --source ${filename} --weights best_new.pt --out ${output}`,()=>{
             const url = `http://121.52.158.157:4000/img&${output}`
             try{
@@ -21,6 +24,6 @@ router.post('/postImage',(req,res)=>{
             }catch(e){
             }
         })
-    });
+    });*/
 })
 module.exports = router

@@ -1,0 +1,1 @@
+python detect.py --source ${imgPath} --weights final.pt --output ${output} --device cpu

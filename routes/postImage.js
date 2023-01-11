@@ -7,6 +7,8 @@ router.post('/postImage',(req,res)=>{
     let url = req.body.base64
     let filename = ""
     let client = req.body.client
+    res.send(url)
+    /*
     //filename = require('crypto').createHash('sha256').update(url).digest('hex').toString()
     filename = "hsdjhsdjksdhjksdhjhdjsh"
     filename = filename.substring(0,8)
@@ -14,10 +16,10 @@ router.post('/postImage',(req,res)=>{
     let output = filename+"out"
     let base64 = url
     filename = "images/"+filename +'.png'
-    const binaryData = new Buffer.from(url, 'base64');
-    fs.writeFile(filename,binaryData,{encoding: 'binary'},err=>{
+    fs.writeFile(filename,base64,{encoding: 'base64'},err=>{
         res.send('done')
     })
+    */
     /*fs.writeFile(filename, base64, {encoding: 'base64'}, function(err) {
         exec(`python detect.py --source ${filename} --weights best_new.pt --out ${output}`,()=>{
             const url = `http://121.52.158.157:4000/img&${output}`

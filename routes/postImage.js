@@ -7,7 +7,7 @@ router.post('/postImage',(req,res)=>{
     let url = req.body.base64;
     let filename = "";
     let client = req.body.client;
-
+    console.log(url)
     // Create a unique filename
     filename = require('crypto').createHash('sha256').update(url).digest('hex').toString();
     filename = filename.substring(0, 8);

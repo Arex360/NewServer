@@ -12,7 +12,7 @@ router.post('/postImage',(req,res)=>{
     let id= req.body.id
     let output = filename+"out"
     let base64 = url
-    filename = "new/"+filename +'.png'
+    filename = "images/"+filename +'.png'
     fs.writeFile(filename,base64,{encoding: 'base64'},err=>{
         res.send('done')
     })

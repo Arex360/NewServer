@@ -3,6 +3,7 @@ const crypto = require('crypto')
 const query = require('../service/query')
 const fs = require('fs')
 const router = express.Router()
+const base64ToImage = require('base64-to-image')
 router.post('/postImage',(req,res)=>{
     let url = req.body.base64;
     let filename = "";

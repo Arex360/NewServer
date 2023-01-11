@@ -9,7 +9,7 @@ const {connection} = require('./service/connection')
 let startServer = ()=>{
     const app = express()
     app.use(cors())
-    app.use(bodyparser.urlencoded({limit:'50mb',extended:false}))
+    app.use(bodyparser.urlencoded({limit:'50mb',extended:true}))
     app.use(postImage)
     app.use(getImage)
     app.use(addTrap)

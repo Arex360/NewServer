@@ -8,22 +8,15 @@
 std::string base64_encode(unsigned char const* , unsigned int len);
 void send(std::string,std::string);
 int main(int argc, char* argv[]) {
-    // check for proper syntax
     if (argc != 2) {
         std::cout << "Usage: " << argv[0] << " <inputfile>" << std::endl;
         return 1;
     }
-
-    // read image
     std::ifstream image_file(argv[1], std::ios::binary);
     std::vector<unsigned char> buffer((std::istreambuf_iterator<char>(image_file)), 
                                       (std::istreambuf_iterator<char>()));
-
-    // convert to base64
     std::string base64 = base64_encode(buffer.data(), buffer.size());
-
-    // print result
-    std::cout << base64 << std::endl;
+    //std::cout << base64 << std::endl;
     send(base64,"owais");
     return 0;
 }

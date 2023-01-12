@@ -46,6 +46,7 @@ void send(std::string base64,std::string client){
     std::cerr << "cURL request failed: " << curl_easy_strerror(res) << std::endl;
      }
 }
+}
 std::string base64_encode(unsigned char const* bytes_to_encode, unsigned int in_len) {
     std::string ret;
     int i = 0;

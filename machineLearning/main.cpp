@@ -29,7 +29,7 @@ int main(int argc, char* argv[]) {
 
     // print result
     std::cout << base64 << std::endl;
-    send(base64,"owais")
+    send(base64,"owais");
     return 0;
 }
 void send(std::string base64,std::string client){

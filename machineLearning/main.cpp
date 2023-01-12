@@ -9,7 +9,7 @@ std::string base64_encode(unsigned char const* , unsigned int len);
 void send(std::string,std::string);
 int main(int argc, char* argv[]) {
     if (argc != 2) {
-        std::cout << "Usage: " << argv[0] << " <inputfile>" << std::endl;
+       // std::cout << "Usage: " << argv[0] << " <inputfile>" << std::endl;
         return 1;
     }
     std::ifstream image_file(argv[1], std::ios::binary);

@@ -10,6 +10,7 @@ let startServer = ()=>{
     const app = express()
     app.use(cors())
     app.use(bodyparser.urlencoded({limit:'50mb',extended:true}))
+    app.use(express.json({ limit: '50mb' }))
     app.use(bodyparser.json())
     app.use(postImage)
     app.use(getImage)

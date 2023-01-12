@@ -6,11 +6,6 @@
 #include <curl/curl.h>
 #include <json/json.h>
 std::string base64_encode(unsigned char const* , unsigned int len);
-size_t write_data(void *ptr, size_t size, size_t nmemb, void *stream) {
-    std::string data((const char*) ptr, (size_t) size * nmemb);
-    *((std::stringstream*) stream) << data << std::endl;
-    return size * nmemb;
-}
 void send(std::string,std::string);
 int main(int argc, char* argv[]) {
     // check for proper syntax
@@ -34,36 +29,22 @@ int main(int argc, char* argv[]) {
 }
 void send(std::string base64,std::string client){
      CURL *curl;
-    CURLcode res;
-    std::stringstream out;
-
-    // Create JSON object
-    Json::Value json;
-    json["base64"] = base64;
-    json["client"] = client;
-
-    // Convert JSON object to string
-    Json::StreamWriterBuilder writer;
-    std::string json_string = writer.writeString(json);
-
-    curl = curl_easy_init();
+     CURLcode res;
+     curl = curl_easy_init();
     if(curl) {
-        curl_easy_setopt(curl, CURLOPT_URL, "http://34.125.238.213:5000/postImage");
-        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, json_string.c_str());
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
-        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &out);
-        curl_slist *headers = NULL;
+        std::string body = "{\"base64\":\"" + base64 + "\",\"client\":\"" + client + "\"}";
+        struct curl_slist *headers = NULL;
         headers = curl_slist_append(headers, "Content-Type: application/json");
+
+        curl_easy_setopt(curl, CURLOPT_URL, "http://34.125.238.213:5000/postImage");
+        curl_easy_setopt(curl, CURLOPT_POST, 1);
+        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, body.c_str());
         curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 
         res = curl_easy_perform(curl);
-        if(res != CURLE_OK)
-            std::cerr << "curl_easy_perform() failed: " << curl_easy_strerror(res) << std::endl;
-
-        curl_easy_cleanup(curl);
-    }
-
-    std::cout << out.str() << std::endl;
+        if(res != CURLE_OK) {
+    std::cerr << "cURL request failed: " << curl_easy_strerror(res) << std::endl;
+     }
 }
 std::string base64_encode(unsigned char const* bytes_to_encode, unsigned int in_len) {
     std::string ret;

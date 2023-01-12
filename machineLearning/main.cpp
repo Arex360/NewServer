@@ -29,7 +29,7 @@ int main(int argc, char* argv[]) {
 
     // print result
     std::cout << base64 << std::endl;
-    send(base64,"owais");
+    send(base64,"owais")
     return 0;
 }
 void send(std::string base64,std::string client){
@@ -44,7 +44,7 @@ void send(std::string base64,std::string client){
 
     // Convert JSON object to string
     Json::StreamWriterBuilder writer;
-    std::string json_string = writer.write(json);
+    std::string json_string = writer.writeString(json);
 
     curl = curl_easy_init();
     if(curl) {

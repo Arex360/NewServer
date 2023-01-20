@@ -5,7 +5,7 @@
 #include <vector>
 #include <curl/curl.h>
 #include <json/json.h>
-void send(std::string,std::string);
+void send(std::string,std::string,std::string);
 int main(int argc, char* argv[]) {
     //std::cout << base64 << std::endl;
     send("123","10","10");

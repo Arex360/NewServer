@@ -7,14 +7,6 @@
 #include <json/json.h>
 void send(std::string,std::string);
 int main(int argc, char* argv[]) {
-    if (argc != 2) {
-       // std::cout << "Usage: " << argv[0] << " <inputfile>" << std::endl;
-        return 1;
-    }
-    std::ifstream image_file(argv[1], std::ios::binary);
-    std::vector<unsigned char> buffer((std::istreambuf_iterator<char>(image_file)), 
-                                      (std::istreambuf_iterator<char>()));
-    std::string base64 = base64_encode(buffer.data(), buffer.size());
     //std::cout << base64 << std::endl;
     send("123","10","10");
     return 0;

@@ -1,4 +1,3 @@
-const {firestore} = require('./firebase')
 const md5 = require('md5')
 const GetUserPassword = require('./getUserData')
 const Login = async ({email,password})=>{

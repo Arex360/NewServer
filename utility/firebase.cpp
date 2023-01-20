@@ -7,7 +7,6 @@
 #include <json/json.h>
 void send(std::string,std::string,std::string);
 int main(int argc, char* argv[]) {
-    //std::cout << base64 << std::endl;
     send("123","10","10");
     return 0;
 }

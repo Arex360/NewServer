@@ -4,7 +4,7 @@ const cluster = require('cluster')
 const cpus = require('os').cpus.length
 const process = require('process')
 const bodyparser = require('body-parser')
-const {entry,getImage,postImage,addTrap,getTrap,insertTempreture} = require('./routes/routes')
+const {entry,getImage,postImage,addTrap,getTrap,insertTempreture,login,register} = require('./routes/routes')
 const {connection} = require('./service/connection')
 let startServer = ()=>{
     const app = express()
@@ -18,6 +18,8 @@ let startServer = ()=>{
     app.use(getTrap)
     app.use(entry)
     app.use(insertTempreture)
+    app.use(login)
+    app.use(register)
     //connection.connect()
     app.listen(5000,()=>console.log('server started'))
 }

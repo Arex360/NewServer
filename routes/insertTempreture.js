@@ -5,6 +5,6 @@ const router = express.Router()
 router.post('/insertTempreture', async (req,res)=>{
     const {client,humidity,tempreture} = req.body
     const snapshot = insert(`/weather/${client}`,{humidity,tempreture})
-    res.send('inserted')
+    res.send('done')
 })
 module.exports = router

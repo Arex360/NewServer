@@ -1,9 +1,11 @@
 const express = require('express')
+const registerTrap = require('../firebase/addTrap')
 const query = require('../service/query')
 const router = express.Router()
 router.post('/addTrap',(req,res)=>{
-    const userID = req.body.user
-    const trap = req.baseUrl.trap
-    query(`insert into traps (userID,client) values ('${userID}','${trap}')`,res)
+    const {email,trapID} = req.body
+    const snapshot = registerTrap({email,trapID})
+    console.log('trap added')
+    res.send('ok')
 })
 module.exports = router

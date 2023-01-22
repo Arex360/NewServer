@@ -1,7 +1,7 @@
-POST http://localhost:5000/addTrap HTTP/1.1
+POST http://localhost:5000/validate HTTP/1.1
 content-type: application/json
 
 {
     "email":"sjsdklds",
-    "trapID":"sjhsdjhsdk"
+    "trapID":"sjhsdsdsdjhsdk"
 }

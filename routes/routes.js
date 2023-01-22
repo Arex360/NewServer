@@ -7,4 +7,6 @@ const insertTempreture = require('./insertTempreture')
 const login = require('./login')
 const register = require('./register')
 const getWeatherData = require('./getTemp')
-module.exports = {entry,getImage,postImage,addTrap,getTrap,insertTempreture,login,register,getWeatherData}
+const trapEntry = require('./entryOfTrap')
+const validate = require('./validateTrap')
+module.exports = {entry,getImage,postImage,addTrap,getTrap,insertTempreture,login,register,getWeatherData,trapEntry,validate}

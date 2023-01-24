@@ -10,12 +10,17 @@ int main(int argc, char* argv[]) {
     send("123","10","10","10","10");
     return 0;
 }
-void send(std::string clientID,std::string tempreture,std::string humidity,string battery_voltage, string battery_current){
+void send(std::string clientID,std::string tempreture,std::string humidity,string voltage, string current){
      CURL *curl;
      CURLcode res;
      curl = curl_easy_init();
     if(curl) {
-        std::string body = "{\"client\":\"" + clientID + "\",\"humidity\":\"" + humidity + "\",\"tempreture\":\"" + tempreture + "\",\"voltage\":\"" + battery_voltage + "\",\"current\":\"" + battery_current + "\"}";
+        std::string body = "{
+            \"client\":\"" + clientID + "\",
+            \"humidity\":\"" + humidity + "\",
+            \"tempreture\":\"" + tempreture + "\",
+            \"voltage\":\"" + voltage + "\",
+            \"current\":\"" + current + "\"}";
         struct curl_slist *headers = NULL;
         headers = curl_slist_append(headers, "Content-Type: application/json");
 

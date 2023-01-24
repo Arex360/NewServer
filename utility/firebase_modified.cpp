@@ -10,7 +10,7 @@ int main(int argc, char* argv[]) {
     send("123","10","10","10","10");
     return 0;
 }
-void send(std::string clientID,std::string tempreture,std::string humidity,string voltage, string current){
+void send(std::string clientID,std::string tempreture,std::string humidity,std::string voltage, std::string current){
      CURL *curl;
      CURLcode res;
      curl = curl_easy_init();

@@ -16,7 +16,7 @@ void send(std::string clientID,std::string tempreture,std::string humidity,float
      curl = curl_easy_init();
     if(curl) {
         std::volatge = std::to_string(battery_voltage);
-        stf::current = std::to_string(battery_current);
+        std::current = std::to_string(battery_current);
         std::string body = "{\"client\":\"" + clientID + "\",\"humidity\":\"" + humidity + "\",\"tempreture\":\"" + tempreture + "\",\"voltage\":\"" + volatge + "\",\"current\":\"" + current + "\"}";
         struct curl_slist *headers = NULL;
         headers = curl_slist_append(headers, "Content-Type: application/json");
@@ -32,3 +32,4 @@ void send(std::string clientID,std::string tempreture,std::string humidity,float
      }
 }
 }
+

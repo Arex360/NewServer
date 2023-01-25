@@ -15,7 +15,7 @@ void send(std::string clientID,std::string tempreture,std::string humidity,std::
      CURLcode res;
      curl = curl_easy_init();
     if(curl) {
-        std::string body = "{\"client\":\"" + clientID + "\",\"humidity\":\"" + humidity + "\",\"tempreture\":\"" + tempreture + "\",\"voltage\":\"" + voltage + "\",\"current\":\"" + current + "\"}";
+        std::string body = "{\"client\":\"" + clientID + "\",\"humidity\":\"" + humidity + "\",\"temperature\":\"" + tempreture + "\",\"voltage\":\"" + voltage + "\",\"current\":\"" + current + "\"}";
 
         struct curl_slist *headers = NULL;
         headers = curl_slist_append(headers, "Content-Type: application/json");

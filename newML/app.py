@@ -53,6 +53,7 @@ if __name__ == '__main__':
     def detect_image():
         path = request.get_json(force=True)
         path = path['path']
+        print("processing")
         print(path)
         process_img(path)
         return 'Hello, World!'

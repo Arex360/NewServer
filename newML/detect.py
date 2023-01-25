@@ -142,7 +142,8 @@ def detect(save_img=False):
                 if dataset.mode == 'image':
                     cv2.imwrite(save_path, im0)
                     print(f"the absolute path is {os.path.abspath(save_path)}")
-                    print(f" The image with the result is saved in: {save_path}")
+                    print('task completed 100%')
+                    #print(f" The image with the result is saved in: {save_path}")
                 else:  # 'video' or 'stream'
                     if vid_path != save_path:  # new video
                         vid_path = save_path

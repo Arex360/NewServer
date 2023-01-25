@@ -3,10 +3,10 @@ const express = require("express");
 const insert = require("../firebase/insertData");
 const router = express.Router();
 router.post("/insertTempreture", async (req, res) => {
-  const { client, humidity, tempreture, voltage, current } = req.body;
+  const { client, humidity, temperature, voltage, current } = req.body;
   const snapshot = insert(`/weather/${client}`, {
     humidity,
-    tempreture,
+    temperature,
     voltage,
     current,
   });

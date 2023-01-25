@@ -1,6 +1,7 @@
-POST http://localhost:80/ HTTP/1.1
+POST http://localhost:5000/postTrapImage HTTP/1.1
 content-type: application/json
 
 {
-    "path":"C:\\Users\\jerry\\Documents\\alee.jpg"
+    "trapID":"123",
+    "path":"C:\\Users\\jerry\\Documents\\GitHub\\NewServer\\newML\\runs\\detect\\exp4\\alee.jpg"
 }

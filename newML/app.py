@@ -1,7 +1,7 @@
 import argparse
 import time
 from pathlib import Path
-from flask import Flask
+from flask import Flask,request
 import cv2
 import torch
 import torch.backends.cudnn as cudnn
@@ -41,14 +41,22 @@ if __name__ == '__main__':
     model = attempt_load('yolov7.pt',device)
     model = TracedModel(model,device,opt.img_size)
     stride = int(model.stride.max())
-    def process_img():
+    def process_img(path):
         with torch.no_grad():
             print("The image 1")
-            detect(True,'inference/images/horses.jpg','yolov7.pt',opt,model,stride,device)
+            print(path)
+            opt.source = path
+            detect(True,path,'yolov7.pt',opt,model,stride,device)
     app = Flask(__name__)
     print("server is started")
-    @app.route('/')
+    @app.route('/',methods = ['POST', 'GET'])
     def detect_image():
-        process_img()
+        path = request.get_json(force=True)
+        path = path['path']
+        print(path)
+        process_img(path)
         return 'Hello, World!'
+    @app.route('/exit')
+    def exitApp():
+        exit()
     app.run(host='0.0.0.0', port=80)

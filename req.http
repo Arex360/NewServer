@@ -1,7 +1,6 @@
-POST http://localhost:5000/validate HTTP/1.1
+POST http://localhost:80/ HTTP/1.1
 content-type: application/json
 
 {
-    "email":"sjsdklds",
-    "trapID":"sjhsdsdsdjhsdk"
+    "path":"C:\\Users\\jerry\\Documents\\alee.jpg"
 }

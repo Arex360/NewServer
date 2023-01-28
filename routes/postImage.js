@@ -24,7 +24,8 @@ router.post("/postImage", (req, res) => {
   let binaryData = Buffer.from(url, "base64");
   fs.writeFileSync(filename, binaryData);
   const absPath =path.resolve(filename)
-  axios.post("http://localhost:80", { path: absPath });
+  console.log(absPath)
+  //axios.post("http://localhost:80", { path: absPath });
   res.send("done");
 });
 module.exports = router;

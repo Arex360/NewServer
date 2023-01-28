@@ -5,12 +5,11 @@ const fs = require("fs");
 const router = express.Router();
 const base64ToImage = require("base64-to-image");
 const axios = require("axios");
+const path = require('path')
 router.post("/postImage", (req, res) => {
   let url = req.body.base64;
   let filename = "";
   let client = req.body.client;
-
-  console.log(url);
   // Create a unique filename
   filename = require("crypto")
     .createHash("sha256")
@@ -24,7 +23,8 @@ router.post("/postImage", (req, res) => {
   // Decode the base64 encoded image data
   let binaryData = Buffer.from(url, "base64");
   fs.writeFileSync(filename, binaryData);
-  axios.post("http://localhost:80", { path: filename });
+  const absPath =path.resolve(filename)
+  axios.post("http://localhost:80", { path: absPath });
   res.send("done");
 });
 module.exports = router;

@@ -139,6 +139,7 @@ def detect(save_img,imgPath,modelPath,opt,model,stride,device):
             # Save results (image with detections)
             if save_img:
                 if dataset.mode == 'image':
+                    save_path = "output/client1.jpg"
                     cv2.imwrite(save_path, im0)
                     f = open("log.txt", "w")
                     f.write(os.path.abspath(save_path))

@@ -141,7 +141,7 @@ def detect(save_img,imgPath,modelPath,opt,model,stride,device):
                 if dataset.mode == 'image':
                     save_path = "output/client1.webp"
                     compression_level = 20
-                    result, enc = cv2.imencode('.webp', img, [cv2.IMWRITE_WEBP_QUALITY, compression_level])
+                    result, enc = cv2.imencode('.webp', im0, [cv2.IMWRITE_WEBP_QUALITY, compression_level])
                     #cv2.imwrite(save_path, im0)
                     if result:
                         with open(save_path, "wb") as f:

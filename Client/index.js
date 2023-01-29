@@ -13,7 +13,7 @@ let takePhoto = ()=>{
                 console.log('taken photo')
                 setTimeout(()=>{
                     base64('picture1.jpg').then(res=>{
-                        console.log(res)
+                        console.log("took base64")
                         const base64 = res
                         const client = "client1"
                         axios.post('http://34.125.238.213:5000/postImage',{client,base64}).then(res=>{

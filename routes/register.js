@@ -1,4 +1,9 @@
 //insertTempreture
+/* 
+Registering the user
+
+
+*/
 const express = require('express')
 const insert = require('../firebase/insertData')
 const register = require('../firebase/register')

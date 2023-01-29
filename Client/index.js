@@ -18,6 +18,7 @@ let takePhoto = ()=>{
                         const client = "client1"
                         axios.post('http://34.125.238.213:5000/postImage',{client,base64}).then(res=>{
                             console.log('request sent')
+                            setTimeout(()=>takePhoto(),1000*5)
                         })    
                     })
                 },2000)

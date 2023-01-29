@@ -1,3 +1,7 @@
+/*
+Used for the registering of the trap, the client will add Trap by adding its ID
+*/
+
 const express = require('express')
 const registerTrap = require('../firebase/addTrap')
 const query = require('../service/query')

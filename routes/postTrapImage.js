@@ -1,3 +1,12 @@
+/*
+
+
+Inter server API call, called by Flask
+
+
+*/
+
+
 const express = require("express");
 const postimage = require("../firebase/postImage");
 const router = express.Router();

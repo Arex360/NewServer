@@ -1,3 +1,4 @@
+// * sttaus inactive
 const express = require('express')
 const query = require('../service/query')
 const router = express.Router()

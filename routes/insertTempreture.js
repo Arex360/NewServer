@@ -1,4 +1,10 @@
 //insertTempreture
+
+/*
+Used to enter weather data
+realtime database
+
+*/
 const express = require("express");
 const insert = require("../firebase/insertData");
 const router = express.Router();

@@ -1,3 +1,10 @@
+/*
+
+API to validate trap if its exists
+
+
+*/
+
 const express = require('express')
 const md5 = require('md5')
 const isTrapValid = require('../firebase/validateTap')

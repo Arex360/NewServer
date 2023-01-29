@@ -1,3 +1,12 @@
+/*
+
+Posting the image, the first copy is sent to server
+
+
+
+
+*/
+
 const express = require("express");
 const crypto = require("crypto");
 const query = require("../service/query");

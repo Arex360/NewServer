@@ -16,7 +16,7 @@ print(state)
                 
 async def test():
    # async with websockets.connect('ws://10.42.0.112/ws') as websocket:
-    async with websockets.connect("ws://"+IP+"/ws") as websocket:
+    async with websockets.connect("ws://"+IP+"/ws") as websocket: 
         await websocket.send(slider+state)
        # await websocket.send(jsonString)
         response = await websocket.recv()

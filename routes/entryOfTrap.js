@@ -1,3 +1,9 @@
+/*
+It is used to profile up the trap . Reatime database
+
+*/
+
+
 const express = require('express')
 const trapEntry = require('../firebase/trapEntry')
 const md5 = require('md5')

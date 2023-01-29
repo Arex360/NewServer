@@ -6,7 +6,7 @@ import cv2
 import torch
 import torch.backends.cudnn as cudnn
 from numpy import random
-
+import requests
 from models.experimental import attempt_load
 from utils.datasets import LoadStreams, LoadImages
 from utils.general import check_img_size, check_requirements, check_imshow, non_max_suppression, apply_classifier, \
@@ -145,6 +145,9 @@ def detect(save_img,imgPath,modelPath,opt,model,stride,device):
                     f.close()
                     print(f"the absolute path is {os.path.abspath(save_path)}")
                     print(f" The image with the result is saved in: {save_path}")
+                    url = "http://localhost:5000/postTrapImage"
+                    data = {"trapID":"client1","path":os.path.abspath(save_path)}
+                    requests.post(url,data=data)
                 else:  # 'video' or 'stream'
                     if vid_path != save_path:  # new video
                         vid_path = save_path

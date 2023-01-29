@@ -139,8 +139,13 @@ def detect(save_img,imgPath,modelPath,opt,model,stride,device):
             # Save results (image with detections)
             if save_img:
                 if dataset.mode == 'image':
-                    save_path = "output/client1.jpg"
-                    cv2.imwrite(save_path, im0)
+                    save_path = "output/client1.webp"
+                    compression_level = 20
+                    result, enc = cv2.imencode('.webp', img, [cv2.IMWRITE_WEBP_QUALITY, compression_level])
+                    #cv2.imwrite(save_path, im0)
+                    if result:
+                        with open(save_path, "wb") as f:
+                            f.write(enc)
                     f = open("log.txt", "w")
                     f.write(os.path.abspath(save_path))
                     f.close()

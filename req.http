@@ -1,4 +1,4 @@
-GET http://localhost:5000/getData/2a5ae8c1d14a8cb5f83f9bcfbd191ef7 HTTP/1.1
+GET http://localhost:5000/traps/0cc175b9c0f1b6a831c399e269772661 HTTP/1.1
 content-type: application/json
 
 {

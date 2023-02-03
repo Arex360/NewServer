@@ -18,6 +18,7 @@ const {
   trapEntry,
   validate,
   getTrapImage,
+  getUserProfile,
 } = require("./routes/routes");
 const { connection } = require("./service/connection");
 let startServer = () => {
@@ -39,6 +40,7 @@ let startServer = () => {
   app.use(validate); // validate the trap {trapID} 
   app.use(postTrapImage); // Inter server trap image post { trapID, path }
   app.use(getTrapImage); // Get image of trap { trapID }
+  app.use(getUserProfile) // Get user profile | GET 
   //connection.connect()
   app.listen(5000, () => console.log("server started"));
 };

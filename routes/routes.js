@@ -11,6 +11,7 @@ const trapEntry = require("./entryOfTrap");
 const validate = require("./validateTrap");
 const postTrapImage = require("./postTrapImage");
 const getTrapImage = require("./getTrapImage");
+const getUserProfile = require('./getUserProfile')
 module.exports = {
   postTrapImage,
   entry,
@@ -25,4 +26,5 @@ module.exports = {
   trapEntry,
   validate,
   getTrapImage,
+  getUserProfile
 };

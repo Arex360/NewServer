@@ -14,6 +14,19 @@ from utils.general import check_img_size, check_requirements, check_imshow, non_
 from utils.plots import plot_one_box
 from utils.torch_utils import select_device, load_classifier, time_synchronized, TracedModel
 
+def count(founded_classes,im0):
+  model_values=[]
+  aligns=im0.shape
+  align_bottom=aligns[0]
+  align_right=(aligns[1]/4 ) 
+
+  for i, (k, v) in enumerate(founded_classes.items()):
+    a=f"{k} = {v}"
+    model_values.append(v)
+    align_bottom=align_bottom-35                                                   
+    cv2.putText(im0, str(a) ,(int(align_right),align_bottom), cv2.FONT_HERSHEY_SIMPLEX, 2,(color),4,cv2.LINE_AA)
+
+    
 
 def detect(save_img,imgPath,modelPath,opt,model,stride,device):
     source, weights, view_img, save_txt, imgsz, trace = opt.source, opt.weights, opt.view_img, opt.save_txt, opt.img_size, not opt.no_trace

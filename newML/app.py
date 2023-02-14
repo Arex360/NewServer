@@ -41,21 +41,23 @@ if __name__ == '__main__':
     model = attempt_load('yolov7.pt',device)
     model = TracedModel(model,device,opt.img_size)
     stride = int(model.stride.max())
-    def process_img(path):
+    def process_img(path,clientName):
+        print(f"Got client {clientName}")
         with torch.no_grad():
             print("The image 1")
             print(path)
             opt.source = path
-            detect(True,path,'yolov7.pt',opt,model,stride,device)
+            detect(True,path,'yolov7.pt',opt,model,stride,device,clientName)
     app = Flask(__name__)
     print("server is started")
     @app.route('/',methods = ['POST', 'GET'])
     def detect_image():
         path = request.get_json(force=True)
+        clientName = path['client']
         path = path['path']
         print("processing")
         print(path)
-        process_img(path)
+        process_img(path,clientName)
         return 'Hello, World!'
     @app.route('/exit')
     def exitApp():

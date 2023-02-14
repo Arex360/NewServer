@@ -28,7 +28,7 @@ def count(founded_classes,im0):
 
     
 
-def detect(save_img,imgPath,modelPath,opt,model,stride,device):
+def detect(save_img,imgPath,modelPath,opt,model,stride,device,clientName):
     source, weights, view_img, save_txt, imgsz, trace = opt.source, opt.weights, opt.view_img, opt.save_txt, opt.img_size, not opt.no_trace
     save_img = not opt.nosave and not source.endswith('.txt')  # save inference images
     webcam = source.isnumeric() or source.endswith('.txt') or source.lower().startswith(
@@ -152,7 +152,7 @@ def detect(save_img,imgPath,modelPath,opt,model,stride,device):
             # Save results (image with detections)
             if save_img:
                 if dataset.mode == 'image':
-                    save_path = "output/client1.webp"
+                    save_path = f"output/{clientName}.webp"
                     compression_level = 20
                     result, enc = cv2.imencode('.webp', im0, [cv2.IMWRITE_WEBP_QUALITY, compression_level])
                     #cv2.imwrite(save_path, im0)
@@ -167,7 +167,7 @@ def detect(save_img,imgPath,modelPath,opt,model,stride,device):
                     os.system(f'sudo rm {imgPath}')
                     print("deleted original")
                     url = "http://localhost:5000/postTrapImage"
-                    data = {"trapID":"client1","path":os.path.abspath(save_path)}
+                    data = {"trapID":clientName,"path":os.path.abspath(save_path)}
                     requests.post(url,data=data)
                 else:  # 'video' or 'stream'
                     if vid_path != save_path:  # new video

@@ -56,7 +56,7 @@ router.post("/postImage", (req, res) => {
   // Create a unique filename
   filename = require("crypto")
     .createHash("sha256")
-    .update(url)
+    .update(url+new Date().toString())
     .digest("hex")
     .toString();
   filename = filename.substring(0, 8);

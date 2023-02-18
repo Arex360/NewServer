@@ -19,6 +19,9 @@ const {
   validate,
   getTrapImage,
   getUserProfile,
+  ADDDetections,
+  GETDetections,
+  rmTrap,
 } = require("./routes/routes");
 const { connection } = require("./service/connection");
 let startServer = () => {
@@ -41,6 +44,10 @@ let startServer = () => {
   app.use(postTrapImage); // Inter server trap image post { trapID, path }
   app.use(getTrapImage); // Get image of trap { trapID }
   app.use(getUserProfile) // Get user profile | GET 
+  app.use(ADDDetections)
+  app.use(GETDetections)
+  app.use(rmTrap)
+  
   //connection.connect()
   app.listen(5000, () => console.log("server started"));
 };

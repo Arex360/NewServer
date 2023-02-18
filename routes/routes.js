@@ -12,6 +12,9 @@ const validate = require("./validateTrap");
 const postTrapImage = require("./postTrapImage");
 const getTrapImage = require("./getTrapImage");
 const getUserProfile = require('./getUserProfile')
+const ADDDetections = require('./Detection')
+const GETDetections = require('./DetectionGet')
+const rmTrap = require('./RmTrap')
 module.exports = {
   postTrapImage,
   entry,
@@ -26,5 +29,8 @@ module.exports = {
   trapEntry,
   validate,
   getTrapImage,
-  getUserProfile
+  getUserProfile,
+  ADDDetections,
+  GETDetections,
+  rmTrap
 };

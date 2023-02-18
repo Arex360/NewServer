@@ -1,7 +1,9 @@
-GET http://localhost:5000/traps/0cc175b9c0f1b6a831c399e269772661 HTTP/1.1
+GET http://localhost:5000/traps/70cb72e6687a8532f00f3c360c15941a HTTP/1.1
 content-type: application/json
 
 {
-    "trapID":"123",
-    "path":"C:\\Users\\jerry\\Documents\\GitHub\\NewServer\\newML\\runs\\detect\\exp4\\alee.jpg"
+    "email": "bb@gmail.com",
+    "password": "bb",
+    "name":"owais",
+    "trapID":"bogga2"
 }

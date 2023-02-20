@@ -39,7 +39,7 @@ if __name__ == '__main__':
     opt.source = 'inference/images/horses.jpg'
     device = select_device('cpu')
     model = attempt_load('yolov7.pt',device)
-    model = TracedModel(model,device,opt.img_size)
+    #model = TracedModel(model,device,opt.img_size)
     stride = int(model.stride.max())
     def process_img(path,clientName):
         print(f"Got client {clientName}")

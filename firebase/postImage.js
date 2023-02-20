@@ -3,7 +3,7 @@ const postImage = async ({ trapID, path }) => {
   const snapshot = await firestore
     .collection("traps")
     .doc(trapID)
-    .set({ path });
+    .set({ path,timestamp: new Date().toString() });
   console.log("post image");
 };
 module.exports = postImage;

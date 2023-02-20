@@ -15,6 +15,7 @@ const getUserProfile = require('./getUserProfile')
 const ADDDetections = require('./Detection')
 const GETDetections = require('./DetectionGet')
 const rmTrap = require('./RmTrap')
+const debugPost = require('./testPostImage')
 module.exports = {
   postTrapImage,
   entry,
@@ -32,5 +33,6 @@ module.exports = {
   getUserProfile,
   ADDDetections,
   GETDetections,
-  rmTrap
+  rmTrap,
+  debugPost
 };

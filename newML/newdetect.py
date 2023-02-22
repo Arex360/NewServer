@@ -14,7 +14,7 @@ from utils.general import check_img_size, check_requirements, check_imshow, non_
 from utils.plots import plot_one_box
 from utils.torch_utils import select_device, load_classifier, time_synchronized, TracedModel
 
-def count(founded_classes,im0):
+def count(founded_classes,im0,clientName):
   model_values=[]
   aligns=im0.shape
   align_bottom=aligns[0]
@@ -23,8 +23,10 @@ def count(founded_classes,im0):
   for i, (k, v) in enumerate(founded_classes.items()):
     a=f"{k} = {v}"
     model_values.append(v)
-    align_bottom=align_bottom-35                                                   
-    cv2.putText(im0, str(a) ,(int(align_right),align_bottom), cv2.FONT_HERSHEY_SIMPLEX, 2,(color),4,cv2.LINE_AA)
+    align_bottom=align_bottom-35    
+    url = f"http://localhost:5000/Adddetection/{clientName}/{k}/{v}"
+    requests.get(url)                                               
+    #cv2.putText(im0, str(a) ,(int(align_right),align_bottom), cv2.FONT_HERSHEY_SIMPLEX, 2,(color),4,cv2.LINE_AA)
 
     
 
@@ -123,12 +125,14 @@ def detect(save_img,imgPath,modelPath,opt,model,stride,device,clientName):
             if len(det):
                 # Rescale boxes from img_size to im0 size
                 det[:, :4] = scale_coords(img.shape[2:], det[:, :4], im0.shape).round()
-
+                founded_classes={} 
                 # Print results
                 for c in det[:, -1].unique():
                     n = (det[:, -1] == c).sum()  # detections per class
+                    class_index=int(c)
+                    founded_classes[names[class_index]]=int(n)
                     s += f"{n} {names[int(c)]}{'s' * (n > 1)}, "  # add to string
-
+                    count(founded_classes=founded_classes,im0=im0,clientName=clientName)
                 # Write results
                 for *xyxy, conf, cls in reversed(det):
                     if save_txt:  # Write to file

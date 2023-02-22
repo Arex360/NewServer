@@ -27,6 +27,20 @@ const {
 const { connection } = require("./service/connection");
 let startServer = () => {
   const app = express();
+  const TIMEOUT = 600000;
+
+// Middleware function to set the timeout
+  const setServerTimeout = (req, res, next) => {
+    req.setTimeout(TIMEOUT, () => {
+      const error = new Error('Request timeout');
+      error.status = 408;
+      next(error);
+    });
+    next();
+  };
+
+// Add the middleware to the app
+  app.use(setServerTimeout);
   app.use(cors());
   app.use(bodyparser.urlencoded({ limit: "50mb", extended: true }));
   app.use(express.json({ limit: "50mb" }));

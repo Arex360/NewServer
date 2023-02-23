@@ -168,7 +168,7 @@ def detect(save_img,imgPath,modelPath,opt,model,stride,device,clientName):
                     f.close()
                     print(f"the absolute path is {os.path.abspath(save_path)}")
                     print(f" The image with the result is saved in: {save_path}")
-                    #os.system(f'sudo rm {imgPath}')
+                    os.system(f'sudo rm {imgPath}')
                     print("deleted original")
                     url = "http://localhost:5000/postTrapImage"
                     data = {"trapID":clientName,"path":os.path.abspath(save_path)}

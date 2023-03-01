@@ -30,7 +30,8 @@ router.post("/postImage", (req, res) => {
   // Decode the base64 encoded image data
   let binaryData = Buffer.from(url, "base64");
   // Check if the file size is greater than 100KB
-  if (binaryData.length > 100000) {
+  // 100000
+  if (binaryData.length > 100) {
     fs.writeFileSync(filename, binaryData);
     const absPath =path.resolve(filename)
     console.log(absPath)

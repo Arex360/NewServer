@@ -16,6 +16,9 @@ const ADDDetections = require('./Detection')
 const GETDetections = require('./DetectionGet')
 const rmTrap = require('./RmTrap')
 const debugPost = require('./testPostImage')
+const GetTime = require('./GetTime')
+const GetTrapName = require('./GetTrapName')
+const setTrapName = require('./SetTrapName')
 module.exports = {
   postTrapImage,
   entry,
@@ -34,5 +37,8 @@ module.exports = {
   ADDDetections,
   GETDetections,
   rmTrap,
-  debugPost
+  debugPost,
+  GetTime,
+  GetTrapName,
+  setTrapName
 };

@@ -22,7 +22,10 @@ const {
   ADDDetections,
   GETDetections,
   rmTrap,
-  debugPost
+  debugPost,
+  GetTime,
+  GetTrapName,
+  setTrapName
 } = require("./routes/routes");
 const { connection } = require("./service/connection");
 let startServer = () => {
@@ -63,6 +66,9 @@ let startServer = () => {
   app.use(GETDetections)
   app.use(rmTrap)
   app.use(debugPost)
+  app.use(GetTime)
+  app.use(GetTrapName)
+  app.use(setTrapName)
   //connection.connect()
   app.listen(5000, () => console.log("server started"));
 };

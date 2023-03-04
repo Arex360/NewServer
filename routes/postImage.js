@@ -17,6 +17,11 @@ router.post("/postImage", (req, res) => {
   let url = req.body.base64;
   let filename = "";
   let client = req.body.client;
+  let log = new Date().toString() + "received image"
+  fs.appendFile(client+'.txt', log, (err) => {
+    if (err) throw err;
+    console.log('Request logged');
+  });
   // Create a unique filename
   filename = require("crypto")
     .createHash("sha256")

@@ -20,6 +20,7 @@
 *.avi
 *.data
 *.cfg
+*.txt
 *.zip
 !cfg/yolov3*.cfg
 /node_modules

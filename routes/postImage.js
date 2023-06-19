@@ -13,10 +13,10 @@ const router = express.Router();
 const base64ToImage = require("base64-to-image");
 const axios = require("axios");
 const path = require('path')
-router.post("/postImage", (req, res) => {
+router.post("/postImage/:client", (req, res) => {
   let url = req.body.base64;
   let filename = "";
-  let client = req.body.client;
+  let {client} = req.params
   let log = new Date().toString() + "received image" +"\n"
   fs.appendFile(client+'.txt', log, (err) => {
     if (err) throw err;

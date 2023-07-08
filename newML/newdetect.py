@@ -30,8 +30,6 @@ def count(founded_classes,im0,clientName):
     url = f"http://localhost:5000/Adddetection/{clientName}/{k}/{v}"
     requests.get(url)                                               
     #cv2.putText(im0, str(a) ,(int(align_right),align_bottom), cv2.FONT_HERSHEY_SIMPLEX, 2,(color),4,cv2.LINE_AA)
-  countURL = f"/setCount/{clientName}/{total_count}"
-  requests.get(countURL)
 
     
 

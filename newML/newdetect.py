@@ -21,14 +21,17 @@ def count(founded_classes,im0,clientName):
   aligns=im0.shape
   align_bottom=aligns[0]
   align_right=(aligns[1]/4 ) 
-
+  total_count = 0
   for i, (k, v) in enumerate(founded_classes.items()):
+    total_count = total_count + int(v)
     a=f"{k} = {v}"
     model_values.append(v)
     align_bottom=align_bottom-35    
     url = f"http://localhost:5000/Adddetection/{clientName}/{k}/{v}"
     requests.get(url)                                               
     #cv2.putText(im0, str(a) ,(int(align_right),align_bottom), cv2.FONT_HERSHEY_SIMPLEX, 2,(color),4,cv2.LINE_AA)
+  countURL = f"/setCount/{clientName}/{total_count}"
+  requests.get(countURL)
 
     
 

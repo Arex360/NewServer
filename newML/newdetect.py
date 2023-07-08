@@ -38,6 +38,10 @@ def count(founded_classes,im0,clientName):
 
 def detect(save_img,imgPath,modelPath,opt,model,stride,device,clientName):
     reset(clientName,"fallarmyworm")
+    reset(clientName,"pinkbollworm")
+    reset(clientName,"cucurbitae")
+    reset(clientName,"dorsalis")
+    reset(clientName,"zonata")
     source, weights, view_img, save_txt, imgsz, trace = opt.source, opt.weights, opt.view_img, opt.save_txt, opt.img_size, not opt.no_trace
     save_img = not opt.nosave and not source.endswith('.txt')  # save inference images
     webcam = source.isnumeric() or source.endswith('.txt') or source.lower().startswith(

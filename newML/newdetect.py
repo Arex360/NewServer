@@ -28,6 +28,8 @@ def count(founded_classes,im0,clientName):
     model_values.append(v)
     align_bottom=align_bottom-35    
     url = f"http://localhost:5000/Adddetection/{clientName}/{k}/{v}"
+    countURL = f"http://localhost:3001/setCount/{clientName}/{v}"
+    requests.get(countURL)
     requests.get(url)                                               
     #cv2.putText(im0, str(a) ,(int(align_right),align_bottom), cv2.FONT_HERSHEY_SIMPLEX, 2,(color),4,cv2.LINE_AA)
 

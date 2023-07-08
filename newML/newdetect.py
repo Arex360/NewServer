@@ -23,6 +23,7 @@ def count(founded_classes,im0,clientName):
   align_right=(aligns[1]/4 ) 
   total_count = 0
   for i, (k, v) in enumerate(founded_classes.items()):
+    print(k)
     total_count = total_count + int(v)
     a=f"{k} = {v}"
     model_values.append(v)

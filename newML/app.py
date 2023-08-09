@@ -13,6 +13,7 @@ from utils.general import check_img_size, check_requirements, check_imshow, non_
 from utils.plots import plot_one_box
 from utils.torch_utils import select_device, load_classifier, time_synchronized, TracedModel
 from newdetect import detect
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--weights', nargs='+', type=str, default='yolov7.pt', help='model.pt path(s)')
@@ -38,26 +39,43 @@ if __name__ == '__main__':
     #check_requirements(exclude=('pycocotools', 'thop'))
     opt.source = 'inference/images/horses.jpg'
     device = select_device('cpu')
-    model = attempt_load('yolov7.pt',device)
+    model1Path = "yolov7.pt"
+    model2Path = "yolov2.pt"
+    model = attempt_load(model1Path,device)
+    print("Model 1 loaded")
+    model2 = attempt_load(model2Path,device)
+    print("Model2 Loaded")
     #model = TracedModel(model,device,opt.img_size)
     stride = int(model.stride.max())
-    def process_img(path,clientName):
+    def process_img(path,clientName,modelID):
         print(f"Got client {clientName}")
         with torch.no_grad():
             print("The image 1")
             print(path)
             opt.source = path
-            detect(True,path,'yolov7.pt',opt,model,stride,device,clientName)
+            if modelID == 0:
+                detect(True,path,model1Path,opt,model,stride,device,clientName)
+            elif modelID == 1:
+                detect(True,path,model2Path,opt,model2,stride,device,clientName)
+     
     app = Flask(__name__)
     print("server is started")
     @app.route('/',methods = ['POST', 'GET'])
     def detect_image():
         path = request.get_json(force=True)
         clientName = path['client']
+        modelID = 1
+        _model = path['model']
+        print(_model)
+        #modelID = int(_model)
+        print(type(_model))
         path = path['path']
         print("processing")
         print(path)
-        process_img(path,clientName)
+        if modelID == 0:
+            process_img(path,clientName,modelID)
+        elif modelID == 1:
+            process_img(path,clientName,modelID)
         return 'Hello, World!'
     @app.route('/exit')
     def exitApp():

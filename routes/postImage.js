@@ -40,7 +40,7 @@ router.post("/postImage/:client", (req, res) => {
     fs.writeFileSync(filename, binaryData);
     const absPath =path.resolve(filename)
     console.log(absPath)
-    axios.post("http://localhost:80", { path: absPath, client });
+    axios.post("http://127.0.0.1:80", { path: absPath, client , model:"1"});
   }
   res.send("done");
 });

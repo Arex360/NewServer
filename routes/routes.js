@@ -19,6 +19,8 @@ const debugPost = require('./testPostImage')
 const GetTime = require('./GetTime')
 const GetTrapName = require('./GetTrapName')
 const setTrapName = require('./SetTrapName')
+const setModelProfile = require('./modelProfile')
+const getModelProfile = require('./getModelProfile')
 module.exports = {
   postTrapImage,
   entry,
@@ -40,5 +42,7 @@ module.exports = {
   debugPost,
   GetTime,
   GetTrapName,
-  setTrapName
+  setTrapName,
+  setModelProfile,
+  getModelProfile
 };

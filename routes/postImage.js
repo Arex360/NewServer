@@ -13,7 +13,7 @@ const router = express.Router();
 const base64ToImage = require("base64-to-image");
 const axios = require("axios");
 const path = require('path')
-router.post("/postImage/:client", (req, res) => {
+router.post("/postImage/:client", async (req, res) => {
   let url = req.body.base64;
   let filename = "";
   let {client} = req.params
@@ -40,7 +40,12 @@ router.post("/postImage/:client", (req, res) => {
     fs.writeFileSync(filename, binaryData);
     const absPath =path.resolve(filename)
     console.log(absPath)
-    axios.post("http://127.0.0.1:80", { path: absPath, client , model:"1"});
+    let res = await axios.get(`http://127.0.0.1:5000/getmodel/${client}`)
+    console.log(res)
+    res = res.data
+    res = res.modelID
+    console.log(`printing model : ${res}`)
+    axios.post("http://127.0.0.1:80", { path: absPath, client , model:res});
   }
   res.send("done");
 });

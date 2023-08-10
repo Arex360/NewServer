@@ -47,6 +47,7 @@ if __name__ == '__main__':
     print("Model2 Loaded")
     #model = TracedModel(model,device,opt.img_size)
     stride = int(model.stride.max())
+    stridev2 = int(model2.stride.max())
     def process_img(path,clientName,modelID):
         print(f"Got client {clientName}")
         with torch.no_grad():
@@ -56,7 +57,7 @@ if __name__ == '__main__':
             if modelID == 0:
                 detect(True,path,model1Path,opt,model,stride,device,clientName)
             elif modelID == 1:
-                detect(True,path,model2Path,opt,model2,stride,device,clientName)
+                detect(True,path,model2Path,opt,model2,stridev2,device,clientName)
      
     app = Flask(__name__)
     print("server is started")
@@ -64,10 +65,11 @@ if __name__ == '__main__':
     def detect_image():
         path = request.get_json(force=True)
         clientName = path['client']
-        modelID = 1
+        modelID = 0
         _model = path['model']
         print(_model)
-        #modelID = int(_model)
+        modelID = int(_model)
+        print("Predicting from model "+ str(modelID))
         print(type(_model))
         path = path['path']
         print("processing")

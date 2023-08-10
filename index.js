@@ -25,7 +25,9 @@ const {
   debugPost,
   GetTime,
   GetTrapName,
-  setTrapName
+  setTrapName,
+  getModelProfile,
+  setModelProfile
 } = require("./routes/routes");
 const { connection } = require("./service/connection");
 let startServer = () => {
@@ -69,6 +71,8 @@ let startServer = () => {
   app.use(GetTime)
   app.use(GetTrapName)
   app.use(setTrapName)
+  app.use(setModelProfile)
+  app.use(getModelProfile)
   //connection.connect()
   app.listen(5000, () => console.log("server started"));
 };

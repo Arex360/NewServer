@@ -40,7 +40,7 @@ if __name__ == '__main__':
     opt.source = 'inference/images/horses.jpg'
     device = select_device('cpu')
     model1Path = "yolov7.pt"
-    model2Path = "yolov2.pt"
+    model2Path = "best.pt"
     model = attempt_load(model1Path,device)
     print("Model 1 loaded")
     model2 = attempt_load(model2Path,device)

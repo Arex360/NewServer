@@ -22,7 +22,7 @@ def count(founded_classes,im0,clientName):
   align_bottom=aligns[0]
   align_right=(aligns[1]/4 ) 
   total_count = 0
-  allowed = ['fallarmyworm','cucurbitae','zonata']
+  allowed = ['dorsalis','cucurbitae','pinkbollworm']
   for i, (k, v) in enumerate(founded_classes.items()):
     print(k)
     total_count = total_count + int(v)

@@ -13,11 +13,12 @@ from utils.general import check_img_size, check_requirements, check_imshow, non_
     scale_coords, xyxy2xywh, strip_optimizer, set_logging, increment_path
 from utils.plots import plot_one_box
 from utils.torch_utils import select_device, load_classifier, time_synchronized, TracedModel
-saveable = False;
+
 def reset(clientName,key):
     url = f"http://localhost:5000/Adddetection/{clientName}/{key}/0"
     requests.get(url)
 def count(founded_classes,im0,clientName):
+  saveable = False
   model_values=[]
   aligns=im0.shape
   align_bottom=aligns[0]
@@ -28,7 +29,7 @@ def count(founded_classes,im0,clientName):
     print(k)
     total_count = total_count + int(v)
     if total_count > 0:
-        saveable = True;
+        saveable = True
     a=f"{k} = {v}"
     model_values.append(v)
     align_bottom=align_bottom-35
@@ -36,12 +37,14 @@ def count(founded_classes,im0,clientName):
         url = f"http://localhost:5000/Adddetection/{clientName}/{k}/{v}"
         countURL = f"http://localhost:3001/setCount/{clientName}/{v}"
         requests.get(countURL)
-        requests.get(url)                                               
+        requests.get(url)
+    return saveable                                               
     #cv2.putText(im0, str(a) ,(int(align_right),align_bottom), cv2.FONT_HERSHEY_SIMPLEX, 2,(color),4,cv2.LINE_AA)
 
     
 
 def detect(save_img,imgPath,modelPath,opt,model,stride,device,clientName):
+    saveable = False
     reset(clientName,"fallarmyworm")
     reset(clientName,"pinkbollworm")
     reset(clientName,"cucurbitae")
@@ -149,7 +152,7 @@ def detect(save_img,imgPath,modelPath,opt,model,stride,device,clientName):
                     class_index=int(c)
                     founded_classes[names[class_index]]=int(n)
                     s += f"{n} {names[int(c)]}{'s' * (n > 1)}, "  # add to string
-                    count(founded_classes=founded_classes,im0=im0,clientName=clientName)
+                    saveable = count(founded_classes=founded_classes,im0=im0,clientName=clientName)
                 # Write results
                 for *xyxy, conf, cls in reversed(det):
                     if int(cls) in target_classes:
@@ -175,7 +178,7 @@ def detect(save_img,imgPath,modelPath,opt,model,stride,device,clientName):
             if save_img:
                 if dataset.mode == 'image':
                     save_path = f"output/{clientName}.webp"
-                    save_path2 = f"output/client1/{clientName}.webp"
+                    save_path2 = f"output/client1/{clientName}.png"
                     compression_level = 20
                     result, enc = cv2.imencode('.webp', im0, [cv2.IMWRITE_WEBP_QUALITY, compression_level])
                     #cv2.imwrite(save_path, im0)

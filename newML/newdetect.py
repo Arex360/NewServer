@@ -13,6 +13,7 @@ from utils.general import check_img_size, check_requirements, check_imshow, non_
     scale_coords, xyxy2xywh, strip_optimizer, set_logging, increment_path
 from utils.plots import plot_one_box
 from utils.torch_utils import select_device, load_classifier, time_synchronized, TracedModel
+saveable = False;
 def reset(clientName,key):
     url = f"http://localhost:5000/Adddetection/{clientName}/{key}/0"
     requests.get(url)
@@ -26,6 +27,8 @@ def count(founded_classes,im0,clientName):
   for i, (k, v) in enumerate(founded_classes.items()):
     print(k)
     total_count = total_count + int(v)
+    if total_count > 0:
+        saveable = True;
     a=f"{k} = {v}"
     model_values.append(v)
     align_bottom=align_bottom-35
@@ -172,6 +175,7 @@ def detect(save_img,imgPath,modelPath,opt,model,stride,device,clientName):
             if save_img:
                 if dataset.mode == 'image':
                     save_path = f"output/{clientName}.webp"
+                    save_path2 = f"output/client1/{clientName}.webp"
                     compression_level = 20
                     result, enc = cv2.imencode('.webp', im0, [cv2.IMWRITE_WEBP_QUALITY, compression_level])
                     #cv2.imwrite(save_path, im0)
@@ -181,6 +185,9 @@ def detect(save_img,imgPath,modelPath,opt,model,stride,device,clientName):
                     f = open("log.txt", "w")
                     f.write(os.path.abspath(save_path))
                     f.close()
+                    if saveable == True:
+                        print("printing backup")
+                        cv2.imwrite(save_path2,im0)
                     print(f"the absolute path is {os.path.abspath(save_path)}")
                     print(f" The image with the result is saved in: {save_path}")
                     #os.system(f'sudo rm {imgPath}')

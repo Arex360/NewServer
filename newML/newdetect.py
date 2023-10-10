@@ -13,7 +13,7 @@ from utils.general import check_img_size, check_requirements, check_imshow, non_
     scale_coords, xyxy2xywh, strip_optimizer, set_logging, increment_path
 from utils.plots import plot_one_box
 from utils.torch_utils import select_device, load_classifier, time_synchronized, TracedModel
-import datetime
+
 def reset(clientName,key):
     url = f"http://localhost:5000/Adddetection/{clientName}/{key}/0"
     requests.get(url)
@@ -177,9 +177,8 @@ def detect(save_img,imgPath,modelPath,opt,model,stride,device,clientName):
             # Save results (image with detections)
             if save_img:
                 if dataset.mode == 'image':
-                    d = str(datetime.datetime.now())
                     save_path = f"output/{clientName}.webp"
-                    save_path2 = f"output/client1/{d}_{clientName}.png"
+                    save_path2 = f"output/client1/{clientName}.png"
                     compression_level = 20
                     result, enc = cv2.imencode('.webp', im0, [cv2.IMWRITE_WEBP_QUALITY, compression_level])
                     #cv2.imwrite(save_path, im0)

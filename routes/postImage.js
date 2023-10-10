@@ -44,7 +44,7 @@ router.post("/postImage/:client", async (req, res) => {
     res = res.data
     res = res.modelID
     console.log(`printing model : ${res}`)
-    //axios.post("http://127.0.0.1:80", { path: absPath, client , model:res});
+    axios.post("http://127.0.0.1:80", { path: absPath, client , model:res});
   }
   const date = Date.now()/1000
   console.log("getting date")

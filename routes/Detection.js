@@ -10,6 +10,8 @@ router.get('/Adddetection/:clientID/:name/:count', async (req,res)=>{
         name = "pink-bollworm"
     }
     await addDetection({name,count,id:clientID})
+    if(clientID != "date")
+        data = await axios.get(`http://localhost:5000/Adddetection/${client}/date/${date}`)
     res.send('done')
 })
 module.exports = router

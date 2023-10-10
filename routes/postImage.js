@@ -48,6 +48,7 @@ router.post("/postImage/:client", async (req, res) => {
     axios.post("http://127.0.0.1:80", { path: absPath, client , model:res});
   }
   const date = Date.now()/1000
+  console.log("getting date")
   let data = ""
   if(client != "date")
      data = await axios.get(`http://localhost:5000/Adddetection/${client}/date/${date}`)

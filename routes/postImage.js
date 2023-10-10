@@ -41,17 +41,17 @@ router.post("/postImage/:client", async (req, res) => {
     const absPath =path.resolve(filename)
     console.log(absPath)
     let res = await axios.get(`http://127.0.0.1:5000/getmodel/${client}`)
+    console.log(res)
     res = res.data
     res = res.modelID
     console.log(`printing model : ${res}`)
-    axios.post("http://127.0.0.1:80", { path: absPath, client , model:res});
+    //axios.post("http://127.0.0.1:80", { path: absPath, client , model:res});
   }
   const date = Date.now()/1000
   console.log("getting date")
   let data = ""
   if(client != "date")
      data = await axios.get(`http://localhost:5000/Adddetection/${client}/date/${date}`)
-  console.log(date)
   res.send("done");
 });
 module.exports = router;

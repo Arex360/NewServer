@@ -41,7 +41,6 @@ router.post("/postImage/:client", async (req, res) => {
     const absPath =path.resolve(filename)
     console.log(absPath)
     let res = await axios.get(`http://127.0.0.1:5000/getmodel/${client}`)
-    console.log(res)
     res = res.data
     res = res.modelID
     console.log(`printing model : ${res}`)

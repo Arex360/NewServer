@@ -155,7 +155,7 @@ app.get('/download/:filename', (req, res) => {
     const filename = req.params.filename;
     const filePath = path.join(filesFolder, filename);
 
-    res.download(filePath, filename);
+    res.sendFile(filePath, filename);
 });
   //connection.connect()
   app.listen(5000, () => console.log("server started"));

@@ -62,14 +62,14 @@ const createHtml = ({days})=>{
     </ul>
     <script>
         // Fetch file list dynamically and insert into the HTML
-        fetch("http://localhost:5000/fileList/${days}")
+        fetch("http://mnsstrap.ddns.net:5000/:5000/fileList/${days}")
             .then(response => response.json())
             .then(data => {
                 const fileList = document.getElementById("fileList");
                 data.forEach(filename => {
                     const listItem = document.createElement("li");
                     const link = document.createElement("a");
-                    link.href = "http://localhost:5000/download/"+filename;
+                    link.href = "http://mnsstrap.ddns.net:5000/:5000/download/"+filename;
                     link.textContent = filename;
                     listItem.appendChild(link);
                     fileList.appendChild(listItem);

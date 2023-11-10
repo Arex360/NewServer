@@ -1,6 +1,6 @@
 const base64 = require('image-to-base64')
 const axios = require('axios')
-base64('picture1.jpg').then(res=>{
+base64('p1.jpg').then(res=>{
     console.log("took base64")
     const base64 = res
     const client = "client3"

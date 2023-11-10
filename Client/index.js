@@ -16,7 +16,7 @@ let takePhoto = ()=>{
                 execSync('echo hi')
                 console.log('taken photo')
                 setTimeout(()=>{
-                    base64('picture1.jpg').then(res=>{
+                    base64('1.jpg').then(res=>{
                         console.log("took base64")
                         const base64 = res
                         const client = "client2"

@@ -31,7 +31,7 @@ router.post("/postImage/:client", async (req, res) => {
   filename = filename.substring(0, 8);
   let id = req.body.id;
   let output = filename + "out";
-  filename = "images/" + filename + ".png";
+  filename = "images/" + client + "_" +filename + ".png";
   // Decode the base64 encoded image data
   let binaryData = Buffer.from(url, "base64");
   // Check if the file size is greater than 100KB

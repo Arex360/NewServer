@@ -4,6 +4,8 @@ const cluster = require("cluster");
 const cpus = require("os").cpus.length;
 const process = require("process");
 const bodyparser = require("body-parser");
+const path = require('path')
+const fs = require('fs')
 const {
   postTrapImage,
   entry,
@@ -43,7 +45,44 @@ let startServer = () => {
     });
     next();
   };
+const createHtml = ({days})=>{
+  return `
+  
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File List</title>
+</head>
+<body>
+    <h1>Files in the "files" folder</h1>
+    <ul id="fileList">
+        <!-- File list will be dynamically inserted here -->
+    </ul>
+    <script>
+        // Fetch file list dynamically and insert into the HTML
+        fetch("http://localhost:5000/fileList/${days}")
+            .then(response => response.json())
+            .then(data => {
+                const fileList = document.getElementById("fileList");
+                data.forEach(filename => {
+                    const listItem = document.createElement("li");
+                    const link = document.createElement("a");
+                    link.href = "http://localhost:5000/download/"+filename;
+                    link.textContent = filename;
+                    listItem.appendChild(link);
+                    fileList.appendChild(listItem);
+                });
+            })
+            .catch(error => console.error("Error fetching file list:", error));
+    </script>
+</body>
+</html>
 
+  
+  `
+}
 // Add the middleware to the app
   app.use(setServerTimeout);
   app.use(cors());
@@ -73,6 +112,51 @@ let startServer = () => {
   app.use(setTrapName)
   app.use(setModelProfile)
   app.use(getModelProfile)
+  //app.use(express.static('images'));
+
+// Define a route to fetch the file list
+app.get('/fileList/:time', async (req, res) => {
+  try {
+      const filesFolder = path.join(__dirname, 'images');
+      const timeInDays = parseInt(req.params.time, 10);
+
+      const fileNames = fs.readdirSync(filesFolder);
+      const filteredFiles = await Promise.all(
+          fileNames.map(async (filename) => {
+              const filePath = path.join(filesFolder, filename);
+              const { birthtime } = fs.statSync(filePath);
+              const fileAgeInDays = Math.floor((Date.now() - birthtime) / (1000 * 60 * 60 * 24));
+
+              if (fileAgeInDays === timeInDays) {
+                  return { filename, birthtime };
+              }
+          })
+      );
+
+      // Filter out undefined values and sort files by birthtime in descending order
+      const sortedFiles = filteredFiles
+          .filter(Boolean)
+          .sort((a, b) => b.birthtime - a.birthtime);
+
+      res.json(sortedFiles.map(file => file.filename));
+  } catch (error) {
+      console.error('Error fetching file list:', error);
+      res.status(500).send('Internal Server Error');
+  }
+});
+
+app.get('/myimages/:days',(req,res)=>{
+    res.send(createHtml({days:req.params.days}))  
+})
+
+// Define a route to handle the download for each file
+app.get('/download/:filename', (req, res) => {
+    const filesFolder = path.join(__dirname, 'images');
+    const filename = req.params.filename;
+    const filePath = path.join(filesFolder, filename);
+
+    res.download(filePath, filename);
+});
   //connection.connect()
   app.listen(5000, () => console.log("server started"));
 };

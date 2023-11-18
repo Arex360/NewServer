@@ -19,6 +19,7 @@ def reset(clientName,key):
     requests.get(url)
 def count(founded_classes,im0,clientName):
   saveable = False
+  print(founded_classes)
   model_values=[]
   aligns=im0.shape
   align_bottom=aligns[0]

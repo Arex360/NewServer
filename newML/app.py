@@ -85,6 +85,8 @@ if __name__ == '__main__':
             process_img(path,clientName,modelID)
         elif modelID == 1:
             process_img(path,clientName,modelID)
+        elif modelID == 2:
+            process_img(path,clientName,modelID)
         return 'Hello, World!'
     @app.route('/exit')
     def exitApp():

@@ -39,7 +39,9 @@ def count(founded_classes,im0,clientName):
         countURL = f"http://localhost:3001/setCount/{clientName}/{v}"
         requests.get(countURL)
         requests.get(url)
-    return saveable                                               
+  return saveable
+  
+                                                   
     #cv2.putText(im0, str(a) ,(int(align_right),align_bottom), cv2.FONT_HERSHEY_SIMPLEX, 2,(color),4,cv2.LINE_AA)
 
     

@@ -21,6 +21,7 @@ const GetTrapName = require('./GetTrapName')
 const setTrapName = require('./SetTrapName')
 const setModelProfile = require('./modelProfile')
 const getModelProfile = require('./getModelProfile')
+const postTrapImagePart = require('./postImagePart')
 module.exports = {
   postTrapImage,
   entry,
@@ -44,5 +45,6 @@ module.exports = {
   GetTrapName,
   setTrapName,
   setModelProfile,
-  getModelProfile
+  getModelProfile,
+  postTrapImagePart
 };

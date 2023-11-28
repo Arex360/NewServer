@@ -172,7 +172,7 @@ def detect(save_img,imgPath,modelPath,opt,model,stride,device,clientName):
                             label = f'{names[int(cls)]} {conf:.2f}'
                             allowed = requests.get(f"http://mnsapi.ddns.net:3001/getmode/{clientName}")
                             allowed = allowed.text
-                            if label in allowed:
+                            if names[int(cls)] in allowed:
                                 plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=2)
 
             # Print time (inference + NMS)

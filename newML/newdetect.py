@@ -13,11 +13,12 @@ from utils.general import check_img_size, check_requirements, check_imshow, non_
     scale_coords, xyxy2xywh, strip_optimizer, set_logging, increment_path
 from utils.plots import plot_one_box
 from utils.torch_utils import select_device, load_classifier, time_synchronized, TracedModel
-
+globalName = ""
 def reset(clientName,key):
     url = f"http://localhost:5000/Adddetection/{clientName}/{key}/0"
     requests.get(url)
 def count(founded_classes,im0,clientName):
+  globalName = clientName
   saveable = False
   print(founded_classes)
   model_values=[]
@@ -169,7 +170,10 @@ def detect(save_img,imgPath,modelPath,opt,model,stride,device,clientName):
 
                         if save_img or view_img:  # Add bbox to image
                             label = f'{names[int(cls)]} {conf:.2f}'
-                            plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=2)
+                            allowed = requests.get(f"http://mnsapi.ddns.net:3001/getmode/{clientName}")
+                            allowed = allowed.text
+                            if label in allowed:
+                                plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=2)
 
             # Print time (inference + NMS)
             print(f'{s}Done. ({(1E3 * (t2 - t1)):.1f}ms) Inference, ({(1E3 * (t3 - t2)):.1f}ms) NMS')

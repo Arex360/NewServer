@@ -49,14 +49,14 @@ if __name__ == '__main__':
     model3Path = "v3.pt"
     model = attempt_load(model1Path,device)
     print("Model 1 loaded")
-    model2 = attempt_load(model2Path,device)
+    #model2 = attempt_load(model2Path,device)
     print("Model2 Loaded")
-    model3 = attempt_load(model3Path,device)
+    #model3 = attempt_load(model3Path,device)
     print("Model 3 Loaded")
     #model = TracedModel(model,device,opt.img_size)
     stride = int(model.stride.max())
-    stridev2 = int(model2.stride.max())
-    stridev3 = int(model3.stride.max())
+    #stridev2 = int(model2.stride.max())
+    #stridev3 = int(model3.stride.max())
     def process_img(path,clientName,modelID):
         print(f"Got client {clientName}")
         with torch.no_grad():
@@ -65,10 +65,10 @@ if __name__ == '__main__':
             opt.source = path
             if modelID == 0:
                 detect(True,path,model1Path,opt,model,stride,device,clientName)
-            elif modelID == 1:
-                detect(True,path,model2Path,opt,model2,stridev2,device,clientName)
-            elif modelID == 2:
-                detect(True,path,model3Path,opt,model3,stridev3,device,clientName)
+            #elif modelID == 1:
+                #detect(True,path,model2Path,opt,model2,stridev2,device,clientName)
+            #elif modelID == 2:
+                #detect(True,path,model3Path,opt,model3,stridev3,device,clientName)
     print("server is started")
     def on_message(client, userdata, msg):
         modelID = 0

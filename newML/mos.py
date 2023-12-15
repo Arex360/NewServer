@@ -76,10 +76,15 @@ if __name__ == '__main__':
         image_data = base64.b64decode(msg.payload)
         with open(f"{msg.topic}.jpg", "wb") as f:
             f.write(image_data)
-        path = f
+        path = f"{msg.topic}.jpg"
         print("processing")
         print(path)
-
+        if modelID == 0:
+            process_img(path,msg.topic,modelID)
+        elif modelID == 1:
+            process_img(path,msg.topic,modelID)
+        elif modelID == 2:
+            process_img(path,msg.topic,modelID)
     client = mqtt.Client()
     client.on_message = on_message
     client.connect(MQTT_BROKER, MQTT_PORT, 60)

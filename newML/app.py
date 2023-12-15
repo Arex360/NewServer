@@ -40,7 +40,7 @@ if __name__ == '__main__':
     #check_requirements(exclude=('pycocotools', 'thop'))
     opt.source = 'inference/images/horses.jpg'
     device = select_device('cpu')
-    model1Path = "yolov7.pt"
+    model1Path = "last0.pt"    #yolov7
     model2Path = "best.pt"
     model3Path = "v3.pt"
     model = attempt_load(model1Path,device)

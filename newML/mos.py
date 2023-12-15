@@ -80,12 +80,7 @@ if __name__ == '__main__':
         path = f
         print("processing")
         print(path)
-        if modelID == 0:
-            process_img(path,msg.topic,modelID)
-        elif modelID == 1:
-            process_img(path,msg.topic,modelID)
-        elif modelID == 2:
-            process_img(path,msg.topic,modelID)
+
     client = mqtt.Client()
     client.on_message = on_message
     client.connect(MQTT_BROKER, MQTT_PORT, 60)

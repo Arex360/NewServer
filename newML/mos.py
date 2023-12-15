@@ -16,7 +16,7 @@ from newdetect import detect
 import paho.mqtt.client as mqtt
 import base64
 if __name__ == '__main__':
-    MQTT_BROKER = "your_oracle_cloud_public_ip_or_domain"  # Replace with your Oracle Cloud instance's public IP or domain name
+    MQTT_BROKER = "152.67.19.152"  # Replace with your Oracle Cloud instance's public IP or domain name
     MQTT_PORT = 1883  # Adjust if your broker uses a different port
     MQTT_TOPIC = "client1"
     parser = argparse.ArgumentParser()

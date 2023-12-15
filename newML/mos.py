@@ -71,7 +71,6 @@ if __name__ == '__main__':
                 detect(True,path,model3Path,opt,model3,stridev3,device,clientName)
     print("server is started")
     def on_message(client, userdata, msg):
-        path = request.get_json(force=True)
         modelID = 0
         print("Predicting from model "+ str(modelID))
         image_data = base64.b64decode(msg.payload)
@@ -80,7 +79,12 @@ if __name__ == '__main__':
         path = f
         print("processing")
         print(path)
-
+        if modelID == 0:
+            process_img(path,msg.topic,modelID)
+        elif modelID == 1:
+            process_img(path,msg.topic,modelID)
+        elif modelID == 2:
+            process_img(path,msg.topic,modelID)
     client = mqtt.Client()
     client.on_message = on_message
     client.connect(MQTT_BROKER, MQTT_PORT, 60)

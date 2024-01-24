@@ -11,4 +11,14 @@ const getTrapName = async ({trapID})=>{
     const {alias} = snapShot.val()
     return alias
 }
-module.exports = {setTrapName,getTrapName}
+const _setTrapDisplayName = async({trapID,alias,clientID})=>{
+    let ref = database.ref(`alias/${clientID}/${trapID}`)
+    const snapshot = await ref.set(alias)
+}
+const _getTrapDisplayName = async ({trapID,clientID})=>{
+    let ref = database.ref(`alias/${clientID}/${trapID}`)
+    let snapShot = await ref.get()
+    const {alias} = snapShot.val()
+    return alias
+}
+module.exports = {setTrapName,getTrapName,_setTrapDisplayName,_getTrapDisplayName}

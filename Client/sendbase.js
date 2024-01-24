@@ -4,7 +4,7 @@ base64('p1.jpg').then(res=>{
     console.log("took base64")
     const base64 = res
     const client = "client7"
-    axios.post('http://mnsstrap.ddns.net:5000/postImage/client24',{client,base64}).then(res=>{
+    axios.post('http://mnsstrap.ddns.net:5000/postImage/client5',{client,base64}).then(res=>{
         console.log('request sent')
     }).catch(e=>{
         console.log(e)
@@ -12,3 +12,4 @@ base64('p1.jpg').then(res=>{
 }).catch(e=>{
     console.log(e)
 })
+//mnsstrap.ddns.net

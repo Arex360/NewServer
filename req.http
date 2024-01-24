@@ -1,9 +1,6 @@
-GET http://localhost:5000/traps/70cb72e6687a8532f00f3c360c15941a HTTP/1.1
+POST http://localhost:5000/setTrapDisplayName/owais/client2 HTTP/1.1
 content-type: application/json
 
 {
-    "email": "bb@gmail.com",
-    "password": "bb",
-    "name":"owais",
-    "trapID":"bogga2"
+    "trapName": "Sample"
 }

@@ -19,6 +19,7 @@ const _getTrapDisplayName = async ({trapID,clientID})=>{
     let ref = database.ref(`alias/${clientID}/${trapID}`)
     let snapShot = await ref.get()
     const {alias} = snapShot.val()
-    return alias
+    console.log(snapShot.val())
+    return snapShot.val()
 }
 module.exports = {setTrapName,getTrapName,_setTrapDisplayName,_getTrapDisplayName}

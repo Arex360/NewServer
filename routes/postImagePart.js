@@ -6,7 +6,9 @@ const router = express.Router();
 const base64ToImage = require("base64-to-image");
 const axios = require("axios");
 const path = require('path')
-let keys = {}
+
+// Use Map instead of a plain object
+let clientImageData = new Map();
 
 router.post("/postImagePart/:client/:flag", async (req, res) => {
     let url = req.body.base64;
@@ -30,22 +32,21 @@ router.post("/postImagePart/:client/:flag", async (req, res) => {
     let output = filename + "out";
     filename = "images/" + client + "_" + filename + ".png";
 
-    if (flag === 0) {
-        keys[client] = [];
-    }
-
-    if (!Array.isArray(keys[client])) {
-        keys[client] = [];
-    }
-
     if (flag !== 2) {
-        keys[client].push(url);
-        console.log(keys[client].length);
+        // Check if the key exists in the Map, and initialize if not
+        if (!clientImageData.has(client) && flag === 0) {
+            clientImageData.set(client, []);
+        }
+        // Check if the key exists before pushing the url
+        if (clientImageData.has(client)) {
+            clientImageData.get(client).push(url);
+            console.log(clientImageData.get(client).length);
+        }
     } else {
-        if (keys[client].length > 0) {
+        if (clientImageData.has(client)) {
             let totalData = "";
-            for (let i = 0; i < keys[client].length; i++) {
-                totalData += keys[client][i];
+            for (let i = 0; i < clientImageData.get(client).length; i++) {
+                totalData += clientImageData.get(client)[i];
             }
             // Decode the base64 encoded image data
             let binaryData = Buffer.from(totalData, "base64");
@@ -55,14 +56,15 @@ router.post("/postImagePart/:client/:flag", async (req, res) => {
                 fs.writeFileSync(filename, binaryData);
                 const absPath = path.resolve(filename);
                 console.log(absPath);
-                keys[client] = null;
+                // Clear the image data for this client
+                clientImageData.delete(client);
                 console.log(filename);
 
                 let res = await axios.get(`http://127.0.0.1:5000/getmodel/${client}`);
                 res = res.data;
                 res = res.modelID;
                 console.log(`printing model : ${res}`);
-                axios.post("http://127.0.0.1:80", { path: absPath, client, model: res });
+                //axios.post("http://127.0.0.1:80", { path: absPath, client, model: res });
             }
             const date = Date.now() / 1000;
             console.log("getting date");

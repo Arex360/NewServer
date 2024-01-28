@@ -6,6 +6,7 @@ const process = require("process");
 const bodyparser = require("body-parser");
 const path = require('path')
 const fs = require('fs')
+const queue = require('express-queue');
 const {
   postTrapImage,
   entry,
@@ -37,6 +38,7 @@ const {
 const { connection } = require("./service/connection");
 let startServer = () => {
   const app = express();
+  app.use(queue({ activeLimit: 1, queuedLimit: -1 }));
   const TIMEOUT = 600000;
 
 // Middleware function to set the timeout

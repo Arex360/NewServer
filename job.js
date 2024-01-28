@@ -55,7 +55,6 @@ let template = async (req,res,id)=>{
       .digest("hex")
       .toString();
     filename = filename.substring(0, 8);
-    let id = req.body.id;
     let output = filename + "out";
     filename = "images/" + client + "_" +filename + ".png";
     if(flag != 2){

@@ -38,8 +38,8 @@ router.post("/postImagePart/:client/:flag", async (req, res) => {
   const id = req.body.id;
   const output = filename + "out";
   const imagePath = "images/" + client + "_" + filename + ".png";
-
-  if (flag !== 2) {
+  flag = flag.toString()
+  if (flag != "2") {
     // Use a Promise to handle concurrent requests
     const keyPromise = keyPromises.get(client) || Promise.resolve();
     keyPromises.set(

@@ -40,7 +40,6 @@ const { connection } = require("./service/connection");
 let startServer = () => {
   const app = express();
   const eventEmitter = new EventEmitter();
-  app.use(queue({ activeLimit: 1, queuedLimit: -1 }));
   app.use((req, res, next) => {
     if (req.active) {
       // If a request is already active, add the current request to the queue

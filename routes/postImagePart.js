@@ -16,6 +16,7 @@ const path = require('path')
 let keys = {}
 router.post("/postImagePart/:client/:flag", async (req, res) => {
   let base64 = req.body.base64;
+  console.log(base64)
   axios.post(`http://localhost:1000/postImagePart/${req.params.client}/${req.params.flag}`,{base64})
   res.send("ok")    
 });

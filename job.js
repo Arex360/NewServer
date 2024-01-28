@@ -9,6 +9,7 @@ let keys = {}
 const app = express()
 app.use(cors())
 app.use(bodyparser());
+app.use(express.json({ limit: "50mb" }));
 const queue = []
 const ExecuteQueue = async ()=>{
     setTimeout(() => {

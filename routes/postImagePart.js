@@ -63,7 +63,7 @@ router.post("/postImagePart/:client/:flag", async (req, res) => {
                 let response = await axios.get(`http://127.0.0.1:5000/getmodel/${client}`);
                 let modelID = response.data.modelID;
                 console.log(`printing model : ${modelID}`);
-                await axios.post("http://127.0.0.1:80", { path: absPath, client, model: modelID });
+                axios.post("http://127.0.0.1:80", { path: absPath, client, model: modelID });
             }
             const date = Date.now() / 1000;
             console.log("getting date");

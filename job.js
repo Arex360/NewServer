@@ -16,7 +16,8 @@ const ExecuteQueue = async ()=>{
     setTimeout(() => {
       if(queue.length > 0){
         let i = queue.splice(0,1)
-        i[0]['out']()
+        //i[0]['out']()
+        build(i[0]['out'].url,i[0]['out']._client,i[0]['out'].flag,0)
         console.log('done')
       }
       ExecuteQueue()
@@ -95,7 +96,8 @@ app.post("/postImagePart/:client/:flag",async (req,res)=>{
     console.log(url.length)
     let flag = req.params.flag
     let _client = req.params.client
-    queue.push({'out':()=>build(url,_client,flag,0)})
+   // queue.push({'out':()=>build(url,_client,flag,0)})
+   queue.push({'out':{url,_client,flag}})
     res.send("done");
 
 })

@@ -20,7 +20,7 @@ const ExecuteQueue = async ()=>{
         console.log('done')
       }
       ExecuteQueue()
-    }, 10000);
+    }, 3000);
 }
 app.get('/exp/:data',(req,res)=>{
     queue.push()

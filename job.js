@@ -56,6 +56,9 @@ const build = async (url,client,flag,id)=>{
        if(keys[`${client}`] == null && flag == 0){
           keys[`${client}`] = []
        }
+       if (keys[`${client}`] == null || keys[`${client}`] == undefined) {
+        keys[`${client}`] = [];
+    }
        keys[`${client}`].push(url)
        console.log(keys[`${client}`].length)
     }else{

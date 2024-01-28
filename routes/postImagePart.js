@@ -33,7 +33,8 @@ router.post("/postImagePart/:client/:flag", async (req, res) => {
     let output = filename + "out";
     filename = "images/" + client + "_" + filename + ".png";
     console.log(`[debug] current flag ${flag}`)
-    if (flag !== 2) {
+    flag = flag.toString()
+    if (flag != "2") {
         if (!keyMap.has(client)) {
             keyMap.set(client, []);
         }

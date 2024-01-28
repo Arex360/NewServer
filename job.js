@@ -52,8 +52,8 @@ const build = async (url,client,flag,id)=>{
     }
     if(flag != 2){
         console.log(`flag - ${flag}`)
-       if(keys[client] == null && flag == 0){
-          keys[client] = []
+       if(keys[`${client}`] == null && flag == 0){
+          keys[`${client}`] = []
        }
        keys[`${client}`].push(url)
        console.log(keys[`${client}`].length)
@@ -75,8 +75,6 @@ const build = async (url,client,flag,id)=>{
       console.log(absPath)
       keys[`${client}`] = null
       console.log(filename)
-      
-    
       let res = await axios.get(`http://127.0.0.1:5000/getmodel/${client}`)
       res = res.data
       res = res.modelID

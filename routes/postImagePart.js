@@ -7,13 +7,13 @@ const base64ToImage = require("base64-to-image");
 const axios = require("axios");
 const path = require('path')
 
-let keys = new Map();
-let keyPromises = new Map();
+let keys = {};
+let lock = {};
 
 router.post("/postImagePart/:client/:flag", async (req, res) => {
   const { client } = req.params;
   const url = req.body.base64;
-  let flag = req.params.flag;
+  const flag = req.params.flag;
 
   console.log(flag);
 
@@ -23,62 +23,61 @@ router.post("/postImagePart/:client/:flag", async (req, res) => {
     console.log('Request logged');
   });
 
-  // Ensure that keys map is initialized for each client
-  if (!keys.has(client)) {
-    keys.set(client, []);
+  // Ensure that keys object is initialized for each client
+  if (!keys[client]) {
+    keys[client] = [];
   }
 
-  // Create a unique filename
-  const filename = crypto
-    .createHash("sha256")
-    .update(client + Date.now().toString())
-    .digest("hex")
-    .substring(0, 8);
+  // Use a lock to handle concurrent requests
+  if (!lock[client]) {
+    lock[client] = true;
 
-  const id = req.body.id;
-  const output = filename + "out";
-  const imagePath = "images/" + client + "_" + filename + ".png";
-  flag = flag.toString()
-  if (flag != "2") {
-    // Use a Promise to handle concurrent requests
-    const keyPromise = keyPromises.get(client) || Promise.resolve();
-    keyPromises.set(
-      client,
-      keyPromise.then(async () => {
-        keys.get(client).push(url);
-        console.log(keys.get(client).length);
-      })
-    );
+    try {
+      // Your existing code for handling requests
+      if (flag !== 2) {
+        keys[client].push(url);
+        console.log(keys[client].length);
+      } else {
+        const totalData = keys[client].join('');
 
-    await keyPromises.get(client);
-  } else {
-    const totalData = keys.get(client).join('');
+        if (totalData.length > 0) {
+          const binaryData = Buffer.from(totalData, "base64");
 
-    if (totalData.length > 0) {
-      const binaryData = Buffer.from(totalData, "base64");
+          if (binaryData.length > 100) {
+            const filename = crypto
+              .createHash("sha256")
+              .update(client + Date.now().toString())
+              .digest("hex")
+              .substring(0, 8);
 
-      if (binaryData.length > 100) {
-        fs.writeFileSync(imagePath, binaryData);
-        const absPath = path.resolve(imagePath);
-        console.log(absPath);
-        console.log(imagePath);
+            const imagePath = "images/" + client + "_" + filename + ".png";
 
-        const response = await axios.get(
-          `http://127.0.0.1:5000/getmodel/${client}`
-        );
-        const modelID = response.data.modelID;
-        console.log(`printing model : ${modelID}`);
-        // Uncomment the following line if you want to send a POST request
-        // await axios.post("http://127.0.0.1:80", { path: absPath, client, model: modelID });
+            fs.writeFileSync(imagePath, binaryData);
+            const absPath = path.resolve(imagePath);
+            console.log(absPath);
+            console.log(imagePath);
+
+            const response = await axios.get(
+              `http://127.0.0.1:5000/getmodel/${client}`
+            );
+            const modelID = response.data.modelID;
+            console.log(`printing model : ${modelID}`);
+            // Uncomment the following line if you want to send a POST request
+            // await axios.post("http://127.0.0.1:80", { path: absPath, client, model: modelID });
+          }
+
+          if (client !== "date") {
+            const date = Date.now() / 1000;
+            console.log("getting date");
+            const data = await axios.get(
+              `http://localhost:5000/Adddetection/${client}/date/${date}`
+            );
+          }
+        }
       }
-
-      if (client !== "date") {
-        const date = Date.now() / 1000;
-        console.log("getting date");
-        const data = await axios.get(
-          `http://localhost:5000/Adddetection/${client}/date/${date}`
-        );
-      }
+    } finally {
+      // Release the lock
+      delete lock[client];
     }
 
     res.send("done");

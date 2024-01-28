@@ -24,7 +24,8 @@ router.post("/postImagePart/:client/:flag", async (req, res) => {
     }
     flag = flag.toString()
     if(flag == "2")
-    keys.delete(client)
+      keys.delete(client)
+    console.log(keys)
     res.send("ok")
   });
 module.exports = router;

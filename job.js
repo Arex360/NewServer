@@ -22,7 +22,7 @@ const ExecuteQueue = async ()=>{
         console.log('done')
       }
       ExecuteQueue()
-    }, 3000);
+    }, 6000);
 }
 app.get('/exp/:data',(req,res)=>{
     queue.push()

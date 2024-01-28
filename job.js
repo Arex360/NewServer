@@ -21,7 +21,7 @@ const ExecuteQueue = async ()=>{
         build(i[0]['out'].url,i[0]['out']._client,i[0]['out'].flag,0)
         console.log('done')
       }
-      setTimeout(()=>ExecuteQueue(),6000)
+      setTimeout(()=>ExecuteQueue(),800)
     }, 6000);
 }
 app.get('/exp/:data',(req,res)=>{
@@ -79,7 +79,7 @@ const build = async (url,client,flag,id)=>{
               res = res.data;
               res = res.modelID;
               console.log(`printing model : ${res}`);
-              axios.post("http://127.0.0.1:80", { path: absPath, client, model: res });
+              //axios.post("http://127.0.0.1:80", { path: absPath, client, model: res });
           }
           const date = Date.now() / 1000;
           console.log("getting date");

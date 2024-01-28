@@ -18,10 +18,10 @@ router.post("/postImagePart/:client/:flag", async (req, res) => {
     let filename = "";
     let { client } = req.params;
     let log = new Date().toString() + "received image" + "\n";
-    fs.appendFile(client + '.txt', log, (err) => {
-        if (err) throw err;
-        console.log('Request logged');
-    });
+    //fs.appendFile(client + '.txt', log, (err) => {
+    //    if (err) throw err;
+    //    console.log('Request logged');
+   // });
     // Create a unique filename
     filename = require("crypto")
         .createHash("sha256")

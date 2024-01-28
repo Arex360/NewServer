@@ -41,7 +41,7 @@ class ImageHandler {
             console.log(this.clientImageData[client].length);
         } else {
             // Check if this.clientImageData[client] is defined before accessing its properties
-            if (this.clientImageData[client] && this.clientImageData[client].length > 0) {
+            if (true) {
                 let totalData = '';
                 for (let i = 0; i < this.clientImageData[client].length; i++) {
                     totalData += this.clientImageData[client][i];

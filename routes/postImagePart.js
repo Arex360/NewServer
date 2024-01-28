@@ -23,6 +23,11 @@ router.post("/postImagePart/:client/:flag", async (req, res) => {
     console.log('Request logged');
   });
 
+  // Ensure that keys map is initialized for each client
+  if (!keys.has(client)) {
+    keys.set(client, []);
+  }
+
   // Create a unique filename
   const filename = crypto
     .createHash("sha256")
@@ -35,10 +40,6 @@ router.post("/postImagePart/:client/:flag", async (req, res) => {
   const imagePath = "images/" + client + "_" + filename + ".png";
 
   if (flag !== 2) {
-    if (keys.get(client) == null && flag === 0) {
-      keys.set(client, []);
-    }
-
     // Use a Promise to handle concurrent requests
     const keyPromise = keyPromises.get(client) || Promise.resolve();
     keyPromises.set(
@@ -51,7 +52,7 @@ router.post("/postImagePart/:client/:flag", async (req, res) => {
 
     await keyPromises.get(client);
   } else {
-    const totalData = keys.get(client) ? keys.get(client).join('') : '';
+    const totalData = keys.get(client).join('');
 
     if (totalData.length > 0) {
       const binaryData = Buffer.from(totalData, "base64");

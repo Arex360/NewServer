@@ -60,13 +60,14 @@ const build = async (url,client,flag,id)=>{
       let totalData = ""
       for(let i = 0; i < keys[`${client}`].length;i++){
           totalData += keys[`${client}`][i]
+          console.log(`chunk size ${keys[`${client}`][i]}`)
           console.log(`wrting ${i+1}/{${keys[`${client}`].length}}`)
       }
         // Decode the base64 encoded image data
     let binaryData = Buffer.from(totalData, "base64");
     // Check if the file size is greater than 100KB
     // 100000
-    if (binaryData.length > 0) {
+    if (binaryData.length > 100) {
         console.log("writting...")
       fs.writeFileSync(filename, binaryData);
       const absPath =path.resolve(filename)

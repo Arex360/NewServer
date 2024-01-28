@@ -37,6 +37,7 @@ router.post("/postImagePart/:client/:flag", async (req, res) => {
         if (!keyMap.has(client)) {
             keyMap.set(client, []);
         }
+        console.log(`Client has ${keyMap.get(client).length}`)
         keyMap.get(client).push(url);
         console.log(keyMap.get(client).length);
     } else {

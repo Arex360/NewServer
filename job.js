@@ -8,7 +8,7 @@ const fs = require('fs')
 let keys = {}
 const app = express()
 app.use(cors())
-app.use(bodyparser());
+//app.use(bodyparser());
 app.use(bodyparser.json({ limit: '50mb', extended: true }));
 app.use(bodyparser.urlencoded({ limit: '50mb', extended: true }));
 const queue = []

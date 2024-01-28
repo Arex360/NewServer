@@ -13,16 +13,16 @@ app.use(cors())
 app.use(bodyparser.json({ limit: '50mb', extended: true }));
 app.use(bodyparser.urlencoded({ limit: '50mb', extended: true }));
 const queue = []
-let keys0 = {}
-let keys1 = {}
-let keys2 = {}
-let keys3 = {}
-let keys4 = {}
-let keys5 = {}
-let keys6 = {}
-let keys7 = {}
+let keys0 = new Map()
+let keys1 = new Map()
+let keys2 = new Map()
+let keys3 = new Map()
+let keys4 = new Map()
+let keys5 = new Map()
+let keys6 = new Map()
+let keys7 = new Map()
 let template = async (req,res,id)=>{
-    let keys = {}
+    let keys = new Map()
     if(id==0)
         keys = keys0
     else if(id == 1)
@@ -58,15 +58,15 @@ let template = async (req,res,id)=>{
     let output = filename + "out";
     filename = "images/" + client + "_" +filename + ".png";
     if(flag != 2){
-       if(keys[client] == null && flag == 0){
-          keys[client] = []
+       if(keys.get(client) == null && flag == 0){
+          keys.set(client,[])
        }
-       keys[client].push(url)
-       console.log(keys[client].length)
+       keys.get(client).push(url)
+       console.log(keys.get(client).length)
     }else{
       let totalData = ""
-      for(let i = 0; i < keys[client].length;i++){
-          totalData += keys[client][i]
+      for(let i = 0; i < keys.get(client).length;i++){
+          totalData += keys.get(client)[i]
       }
         // Decode the base64 encoded image data
     let binaryData = Buffer.from(totalData, "base64");
@@ -76,7 +76,7 @@ let template = async (req,res,id)=>{
       fs.writeFileSync(filename, binaryData);
       const absPath =path.resolve(filename)
       console.log(absPath)
-      keys[client] = null
+      keys.get(client) = null
       console.log(filename)
 
     

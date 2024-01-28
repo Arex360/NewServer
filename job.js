@@ -93,6 +93,8 @@ const build = async (url, client, flag, id) => {
             if (client != 'date') {
                 data = await axios.get(`http://localhost:5000/Adddetection/${client}/date/${date}`);
             }
+        }else{
+            console.log("error")
         }
     }
 };

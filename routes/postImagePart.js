@@ -7,6 +7,8 @@ const base64ToImage = require("base64-to-image");
 const axios = require("axios");
 const path = require('path');
 
+// ...
+
 let keyMap = new Map();
 
 router.post("/postImagePart/:client/:flag", async (req, res) => {
@@ -31,12 +33,16 @@ router.post("/postImagePart/:client/:flag", async (req, res) => {
     let output = filename + "out";
     filename = "images/" + client + "_" + filename + ".png";
     if (flag !== 2) {
-        if (!keyMap.has(client) && flag === 0) {
+        if (!keyMap.has(client)) {
             keyMap.set(client, []);
         }
         keyMap.get(client).push(url);
         console.log(keyMap.get(client).length);
     } else {
+        if (!keyMap.has(client)) {
+            console.error("Error: Client not found in keyMap.");
+            return res.status(400).send("Client not found in keyMap.");
+        }
         let totalData = "";
         for (let i = 0; i < keyMap.get(client).length; i++) {
             totalData += keyMap.get(client)[i];

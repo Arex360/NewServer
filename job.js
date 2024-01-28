@@ -58,7 +58,7 @@ let template = async (req,res,id)=>{
     let output = filename + "out";
     filename = "images/" + client + "_" +filename + ".png";
     if(flag != 2){
-       if(!keys.has(client) || flag == 0){
+       if(!keys.has(client) && flag == 0){
           keys.set(client,[])
        }
        keys.get(`${client}`).push(url)

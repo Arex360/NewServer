@@ -21,7 +21,7 @@ const ExecuteQueue = async ()=>{
         build(i[0]['out'].url,i[0]['out']._client,i[0]['out'].flag,0)
         console.log('done')
       }
-      ExecuteQueue()
+      setTimeout(()=>ExecuteQueue(),6000)
     }, 6000);
 }
 app.get('/exp/:data',(req,res)=>{

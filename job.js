@@ -94,6 +94,7 @@ const build = async (url,client,flag,id)=>{
 }
 app.post("/postImagePart/:client/:flag",async (req,res)=>{
     let url = req.body.base64;
+    console.log(url.length)
     let flag = req.params.flag
     let _client = req.params.client
     queue.push({'out':()=>build(url,_client,flag,0)})

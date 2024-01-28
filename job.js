@@ -56,6 +56,7 @@ const build = async (url,client,flag,id)=>{
        keys[`${client}`].push(url)
        console.log(keys[`${client}`].length)
     }else{
+        console.log("Writing file for "+client)
       let totalData = ""
       for(let i = 0; i < keys[`${client}`].length;i++){
           totalData += keys[`${client}`][i]
@@ -65,6 +66,7 @@ const build = async (url,client,flag,id)=>{
     // Check if the file size is greater than 100KB
     // 100000
     if (binaryData.length > 100) {
+        console.log("writting...")
       fs.writeFileSync(filename, binaryData);
       const absPath =path.resolve(filename)
       console.log(absPath)
@@ -77,6 +79,8 @@ const build = async (url,client,flag,id)=>{
       res = res.modelID
       console.log(`printing model : ${res}`)
       axios.post("http://127.0.0.1:80", { path: absPath, client , model:res});
+    }else{
+        console.log("entity too short, ignoring...")
     }
     const date = Date.now()/1000
     console.log("getting date")

@@ -30,14 +30,19 @@ router.post("/postImagePart/:client/:flag", async (req, res) => {
     let output = filename + "out";
     filename = "images/" + client + "_" + filename + ".png";
 
-    if (flag != 2) {
-        if (!keys[client] && flag == 0) {
-            keys[client] = [];
-        }
+    if (flag === 0) {
+        keys[client] = [];
+    }
+
+    if (!Array.isArray(keys[client])) {
+        keys[client] = [];
+    }
+
+    if (flag !== 2) {
         keys[client].push(url);
         console.log(keys[client].length);
     } else {
-        if (keys[client] && keys[client].length > 0) {
+        if (keys[client].length > 0) {
             let totalData = "";
             for (let i = 0; i < keys[client].length; i++) {
                 totalData += keys[client][i];

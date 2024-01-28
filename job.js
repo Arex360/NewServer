@@ -58,15 +58,15 @@ let template = async (req,res,id)=>{
     let output = filename + "out";
     filename = "images/" + client + "_" +filename + ".png";
     if(flag != 2){
-       if(keys.get(client) == null && flag == 0){
+       if(keys.get(`${client}`) == null && flag == 0){
           keys.set(client,[])
        }
-       keys.get(client).push(url)
-       console.log(keys.get(client).length)
+       keys.get(`${client}`).push(url)
+       console.log(keys.get(`${client}`).length)
     }else{
       let totalData = ""
-      for(let i = 0; i < keys.get(client).length;i++){
-          totalData += keys.get(client)[i]
+      for(let i = 0; i < keys.get(`${client}`).length;i++){
+          totalData += keys.get(`${client}`)[i]
       }
         // Decode the base64 encoded image data
     let binaryData = Buffer.from(totalData, "base64");
@@ -76,7 +76,7 @@ let template = async (req,res,id)=>{
       fs.writeFileSync(filename, binaryData);
       const absPath =path.resolve(filename)
       console.log(absPath)
-      keys.get(client) = null
+      keys.get(`${client}`) = null
       console.log(filename)
 
     

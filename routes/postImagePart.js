@@ -22,6 +22,9 @@ router.post("/postImagePart/:client/:flag", async (req, res) => {
       axios.post(`http://localhost:1000/postImagePart${keys.get(client)}/${req.params.client}/${flag}`,{base64})
     }else{
       keys.set(client,keys.size)
+      console.log(`Sending Request at ${keys.get(client)} at flag ${flag}`)
+      let base64 = req.body.base64;
+      axios.post(`http://localhost:1000/postImagePart${keys.get(client)}/${req.params.client}/${flag}`,{base64})
     }
     flag = flag.toString()
     if(flag == "2")

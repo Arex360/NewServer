@@ -54,7 +54,6 @@ const build = async (url,client,flag,id)=>{
           keys[client] = []
        }
        keys[`${client}`].push(url)
-       console.log(url)
        console.log(keys[`${client}`].length)
     }else{
         console.log("Writing file for "+client)

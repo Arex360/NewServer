@@ -54,7 +54,6 @@ router.post("/postImagePart/:client/:flag", async (req, res) => {
       fs.writeFileSync(filename, binaryData);
       const absPath =path.resolve(filename)
       console.log(absPath)
-      keys.get(client) = null
       console.log(filename)
 
     

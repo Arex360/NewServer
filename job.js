@@ -76,7 +76,7 @@ let template = async (req,res,id)=>{
       fs.writeFileSync(filename, binaryData);
       const absPath =path.resolve(filename)
       console.log(absPath)
-      keys.get(`${client}`) = null
+      keys.delete(`${client}`)
       console.log(filename)
 
     

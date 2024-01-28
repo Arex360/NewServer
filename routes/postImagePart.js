@@ -13,7 +13,7 @@ let keyPromises = new Map();
 router.post("/postImagePart/:client/:flag", async (req, res) => {
   const { client } = req.params;
   const url = req.body.base64;
-  const flag = req.params.flag;
+  let flag = req.params.flag;
 
   console.log(flag);
 

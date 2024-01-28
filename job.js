@@ -60,6 +60,7 @@ const build = async (url,client,flag,id)=>{
       let totalData = ""
       for(let i = 0; i < keys[`${client}`].length;i++){
           totalData += keys[`${client}`][i]
+          console.log(`wrting ${i+1}/{${keys[`${client}`].length}}`)
       }
         // Decode the base64 encoded image data
     let binaryData = Buffer.from(totalData, "base64");

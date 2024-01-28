@@ -73,7 +73,7 @@ let template = async (req,res,id)=>{
     // Check if the file size is greater than 100KB
     // 100000
     if (binaryData.length > 100) {
-      fs.writeFileSync(filename, binaryData);
+      await fs.promises.writeFile(filename, binaryData);
       const absPath =path.resolve(filename)
       console.log(absPath)
       keys.delete(`${client}`)

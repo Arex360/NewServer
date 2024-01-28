@@ -7,6 +7,7 @@ const bodyparser = require('body-parser')
 const fs = require('fs')
 let clientImageData = {};
 const app = express()
+const crypto = require('crypto')
 app.use(cors())
 //app.use(bodyparser());
 app.use(bodyparser.json({ limit: '50mb', extended: true }));

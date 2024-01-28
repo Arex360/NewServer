@@ -6,7 +6,6 @@ const process = require("process");
 const bodyparser = require("body-parser");
 const path = require('path')
 const fs = require('fs')
-const queue = require('express-queue');
 const EventEmitter = require('events');
 const {
   postTrapImage,
@@ -39,21 +38,6 @@ const {
 const { connection } = require("./service/connection");
 let startServer = () => {
   const app = express();
-  const eventEmitter = new EventEmitter();
-  app.use((req, res, next) => {
-    if (req.active) {
-      // If a request is already active, add the current request to the queue
-      req.queued = true;
-      eventEmitter.once('requestProcessed', () => {
-        // Once the previous request is processed, handle the queued request
-        req.next();
-      });
-    } else {
-      // Mark the current request as active
-      req.active = true;
-      next();
-    }
-  });
   const TIMEOUT = 600000;
 
 // Middleware function to set the timeout

@@ -66,7 +66,7 @@ const build = async (url,client,flag,id)=>{
     let binaryData = Buffer.from(totalData, "base64");
     // Check if the file size is greater than 100KB
     // 100000
-    if (binaryData.length > 100) {
+    if (binaryData.length > 0) {
         console.log("writting...")
       fs.writeFileSync(filename, binaryData);
       const absPath =path.resolve(filename)

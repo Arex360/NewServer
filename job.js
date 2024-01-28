@@ -94,7 +94,7 @@ const ExecuteQueue = async () => {
             console.log('done');
         }
         setTimeout(() => ExecuteQueue(), 800);
-    }, 6000);
+    }, 2000);
 };
 
 app.get('/exp/:data', (req, res) => {
@@ -107,6 +107,7 @@ app.post('/postImagePart/:client/:flag', async (req, res) => {
     console.log(url.length);
     let flag = req.params.flag;
     let _client = req.params.client;
+    console.log(`Registering ${_client} with ${flag}`)
     // queue.push({'out':()=>build(url,_client,flag,0)})
     queue.push({ 'out': { url, _client, flag } });
     res.send('done');

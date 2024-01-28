@@ -17,6 +17,7 @@ let keys = new Map()
 router.post("/postImagePart/:client/:flag", async (req, res) => {
     let {client,flag} = req.params
     if(keys.has(client)){
+      console.log(`Sending Request at ${keys.get(client)}`)
       let base64 = req.body.base64;
       axios.post(`http://localhost:1000/postImagePart${keys.get(client)}/${req.params.client}/${req.params.flag}`,{base64})
     }else{
@@ -25,7 +26,6 @@ router.post("/postImagePart/:client/:flag", async (req, res) => {
     flag = flag.toString()
     if(flag == "2")
       keys.delete(client)
-    console.log(keys)
     res.send("ok")
   });
 module.exports = router;

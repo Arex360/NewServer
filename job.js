@@ -43,8 +43,6 @@ const build = async (url,client,flag,id)=>{
       .update(client + Date.now().toString())
       .digest("hex")
       .toString().substring(0, 8);
-
-  let id = req.body.id;
   let output = filename + "out";
   filename = "images/" + client + "_" + filename + ".png";
 

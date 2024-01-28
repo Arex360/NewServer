@@ -73,7 +73,7 @@ const build = async (url,client,flag,id)=>{
       fs.writeFileSync(filename, binaryData);
       const absPath =path.resolve(filename)
       console.log(absPath)
-      keys[`${client}`] = null
+      //keys[`${client}`] = null
       console.log(filename)
       let res = await axios.get(`http://127.0.0.1:5000/getmodel/${client}`)
       res = res.data

@@ -39,6 +39,7 @@ let template = async (req,res,id)=>{
         keys = keys6
     
     let url = req.body.base64;
+    console.log(url)
     let flag = req.params.flag
     console.log(flag)
     let filename = "";

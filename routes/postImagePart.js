@@ -39,6 +39,7 @@ router.post("/postImagePart/:client/:flag", async (req, res) => {
         keyMap.get(client).push(url);
         console.log(keyMap.get(client).length);
     } else {
+        console.log(`current flag ${flag}`)
         if (!keyMap.has(client)) {
             console.error("Error: Client not found in keyMap.");
             return res.status(400).send("Client not found in keyMap.");

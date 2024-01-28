@@ -49,6 +49,7 @@ const build = async (url,client,flag,id)=>{
         console.log('client lost')
     }
     if(flag != 2){
+        console.log(`flag - ${flag}`)
        if(keys[client] == null && flag == 0){
           keys[client] = []
        }

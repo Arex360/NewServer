@@ -4,6 +4,6 @@ const getTrapTime = async ({trapID})=>{
     let time = database.ref(`env/${trapID}/timestamp`)
     const snapshot = await ref.get()
     const _time = await time.get()
-    return snapshot.val() + '-'+ _time.val()
+    return snapshot.val() 
 }
 module.exports = getTrapTime

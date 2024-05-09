@@ -19,6 +19,7 @@ router.get('/absCount/:clientID', async (req,res)=>{
     res4 = Number(res4)
     res5 = Number(res5)
     let count = res1 + res2 + res3 + res4 + res5 
+    console.log("Total = "+ count.toString())
     res.send('ok')
 })
 module.exports = router

@@ -33,7 +33,8 @@ const {
   setModelProfile,
   postTrapImagePart,
   setTrapDisplayName,
-  getTrapDisplayName
+  getTrapDisplayName,
+  absoluteCount
 } = require("./routes/routes");
 const { connection } = require("./service/connection");
 let startServer = () => {
@@ -119,6 +120,7 @@ const createHtml = ({days})=>{
   app.use(postTrapImagePart)
   app.use(setTrapDisplayName)
   app.use(getTrapDisplayName)
+  app.use(absoluteCount)
   //app.use(express.static('images'));
 
 // Define a route to fetch the file list

@@ -24,6 +24,7 @@ const getModelProfile = require('./getModelProfile')
 const postTrapImagePart = require('./postImagePart')
 const setTrapDisplayName = require('./setTrapDisplayName')
 const getTrapDisplayName = require('./getTrapDisplayName')
+const absoluteCount = require('./getAbsoluteCount')
 module.exports = {
   postTrapImage,
   entry,
@@ -50,5 +51,6 @@ module.exports = {
   getModelProfile,
   postTrapImagePart,
   setTrapDisplayName,
-  getTrapDisplayName
+  getTrapDisplayName,
+  absoluteCount
 };

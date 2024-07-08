@@ -13,6 +13,18 @@ const router = express.Router();
 const base64ToImage = require("base64-to-image");
 const axios = require("axios");
 const path = require('path')
+var mysql = require('mysql');
+var con = mysql.createConnection({
+  host: "129.151.145.229",
+  user: "arex",
+  password: "123",
+  database:"smart"
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+});
 router.post("/postImage/:client", async (req, res) => {
   let url = req.body.base64;
   let filename = "";
@@ -37,6 +49,15 @@ router.post("/postImage/:client", async (req, res) => {
   // Check if the file size is greater than 100KB
   // 100000
   if (binaryData.length > 100) {
+    const _timestamp = Date.now();
+    const dbImagesQuery = `INSERT INTO images (time, path, client) VALUES (${_timestamp}, "${filename}", "${client}")`;
+    con.query(dbImagesQuery,(err, result)=>{
+     if(err){
+       console.log(err)
+     }else{
+       console.log("inserted");
+     }
+    })
     fs.writeFileSync(filename, binaryData);
     const absPath =path.resolve(filename)
     console.log(absPath)

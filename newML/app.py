@@ -13,6 +13,11 @@ from utils.general import check_img_size, check_requirements, check_imshow, non_
 from utils.plots import plot_one_box
 from utils.torch_utils import select_device, load_classifier, time_synchronized, TracedModel
 from newdetect import detect
+from colorize import ColorizationNet, colorize_single_image
+import torch
+import torch.nn as nn
+from PIL import Image
+import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -79,6 +84,15 @@ if __name__ == '__main__':
         print("Predicting from model "+ str(modelID))
         print(type(_model))
         path = path['path']
+        grayscaleModel = ColorizationNet()
+        grayscaleModel_path = 'colorization_md1.pth'
+        pretrained = torch.load(grayscaleModel_path, map_location=lambda storage, loc: storage)
+        grayscaleModel.load_state_dict(pretrained)
+        grayscaleModel.eval()
+        criterion = nn.MSELoss()
+        use_gpu = torch.cuda.is_available()
+        colored_image = colorize_single_image(path, grayscaleModel, criterion, '', epoch=0, use_gpu=use_gpu)
+        plt.imsave(arr=colored_image,fname=path)
         print("processing")
         print(path)
         if modelID == 0:

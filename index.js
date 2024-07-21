@@ -8,6 +8,7 @@ const path = require('path')
 const fs = require('fs')
 const EventEmitter = require('events');
 const {
+  ChartData,
   postTrapImage,
   entry,
   getImage,
@@ -121,6 +122,7 @@ const createHtml = ({days})=>{
   app.use(setTrapDisplayName)
   app.use(getTrapDisplayName)
   app.use(absoluteCount)
+  app.use(ChartData)
   //app.use(express.static('images'));
 
 // Define a route to fetch the file list

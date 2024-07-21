@@ -25,7 +25,9 @@ const postTrapImagePart = require('./postImagePart')
 const setTrapDisplayName = require('./setTrapDisplayName')
 const getTrapDisplayName = require('./getTrapDisplayName')
 const absoluteCount = require('./getAbsoluteCount')
+const ChartData = require('./ChartData')
 module.exports = {
+  ChartData,
   postTrapImage,
   entry,
   getImage,
